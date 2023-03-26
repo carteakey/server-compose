@@ -5,7 +5,7 @@ A collection of sample [docker compose](https://docs.docker.com/compose/) files 
 
 - Install [Docker](https://docs.docker.com/get-docker/).
 - Download/copy the folders of the respective application(s) you want to install.
-- Replace <parameters> with your values. More details on each application's link.
+- Replace &lt;parameters&gt; with your values. More details on each application's link.
 - Spin up the docker image.
 ```bash
 docker compose up -d
@@ -59,8 +59,9 @@ See [here](https://prometheus.io/docs/guides/cadvisor/) & [here](https://grafana
 - [EarnApp](https://earnapp.com/bandwidth) - Earn passive income while your devices rest.
 - [PawnsApp](https://pawns.app/internet-sharing/) - Make passive money online by completing surveys and sharing your internet.
 
-## Roadmap
+# Roadmap
 - List will continue to grow, but will try to not be overwhelming.
+- Individual README files for each compose.
 - Interactive build script to spin up docker containers with automatic configurations.
 
 # Contribution.
