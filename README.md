@@ -32,6 +32,7 @@ docker compose up -d
 - [Prowlarr](https://wiki.servarr.com/prowlarr) - Prowlarr is an indexer manager/proxy built on the popular *arr* stack to integrate with your various PVR apps.  ([GitHub](https://github.com/Prowlarr/Prowlarr))
 - [Bazarr](https://www.bazarr.media/) - Bazarr is a companion application to Sonarr and Radarr that manages and downloads subtitles based on your requirements.([GitHub](https://github.com/morpheus65535/bazarr))
 - [Deemix](https://deemix.app/) - deemix is a barebone deezer downloader library built from the ashes of Deezloader Remix.
+- [Overseerr](https://overseerr.dev/) - Overseerr is a request management and media discovery tool built to work with your existing Plex ecosystem.([GitHub](https://github.com/sct/overseerr)) 
 
 ## Tools
 - [Portainer](https://github.com/portainer/portainer) - Portainer is a lightweight management UI which allows you to easily manage your Docker containers
@@ -39,7 +40,6 @@ docker compose up -d
 - [Scrutiny](https://github.com/AnalogJ/scrutiny) - WebUI for smartd S.M.A.R.T monitoring. Health check for hard drives.
 - [Epic Games Store Weekly Free Games](https://github.com/claabs/epicgames-freegames-node) - Automatically login and redeem promotional free games from the Epic Games Store.
 - [pyLoad](https://github.com/pyload/pyload) - Free and Open Source download manager written in Python and designed to be extremely lightweight, easily extensible and fully manageable via web.
-- 
 
 ## Monitoring
 See [here](https://prometheus.io/docs/guides/cadvisor/) & [here](https://grafana.com/docs/grafana/latest/getting-started/get-started-grafana-prometheus) on how you can use cAdvisor, Prometheus and Grafana to monitor your server's usage.
