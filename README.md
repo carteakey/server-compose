@@ -38,12 +38,15 @@ docker compose up -d
 - [WatchTower](https://github.com/containrrr/watchtower) - A process for automating Docker container base image updates.
 - [Scrutiny](https://github.com/AnalogJ/scrutiny) - WebUI for smartd S.M.A.R.T monitoring. Health check for hard drives.
 - [Epic Games Store Weekly Free Games](https://github.com/claabs/epicgames-freegames-node) - Automatically login and redeem promotional free games from the Epic Games Store.
+- [pyLoad](https://github.com/pyload/pyload) - Free and Open Source download manager written in Python and designed to be extremely lightweight, easily extensible and fully manageable via web.
+- 
 
 ## Monitoring
 See [here](https://prometheus.io/docs/guides/cadvisor/) & [here](https://grafana.com/docs/grafana/latest/getting-started/get-started-grafana-prometheus) on how you can use cAdvisor, Prometheus and Grafana to monitor your server's usage.
 
-- [cAdvisor](https://github.com/google/cadvisor) - Analyzes resource usage and performance characteristics of running containers.
+- [cAdvisor](https://github.com/google/cadvisor) - Analyzes resource usage and performance characteristics of running docker containers.
 - [Prometheus](https://prometheus.io/) - An open-source monitoring system with a dimensional data model, flexible query language, efficient time series database.
+- [node-exporter](https://github.com/prometheus/node_exporter) - The Prometheus Node Exporter exposes a wide variety of hardware- and kernel-related metrics. 
 - [Grafana](https://grafana.com/) - Grafana is a multi-platform open source analytics and interactive visualization web application. It provides charts, graphs, and alerts for the web when connected to supported data sources. 
 
 ## Development
