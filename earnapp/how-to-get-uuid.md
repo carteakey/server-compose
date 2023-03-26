@@ -1,0 +1,1 @@
+Install EarnApp through regular script. Get the  https://earnapp.com/r/sdk-node-<uuid> link it generates and paste it in the compose. (e.g. sdk-node-11cf7dbaefdb48b1b8e892cc077038b0)

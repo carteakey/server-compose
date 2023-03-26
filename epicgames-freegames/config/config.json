@@ -1,0 +1,21 @@
+{
+  "runOnStartup": true,
+  "cronSchedule": "5 16 * * *",
+  "logLevel": "info",
+  "webPortalConfig": {
+    "baseUrl": "http://<your_local_ip>:4206"
+  },
+  "accounts": [
+    {
+      "email": "<email>",
+      "password": "<password>",
+      "totp": "<totp>"
+    }
+  ],
+  "notifiers": [
+    {
+      "type": "discord",
+      "webhookUrl": "<webhookurl>"
+    }
+  ]
+}

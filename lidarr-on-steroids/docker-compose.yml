@@ -1,0 +1,13 @@
+version: "3"
+services:
+  lidarr:
+    image: youegraillot/lidarr-on-steroids
+    restart: unless-stopped
+    ports:
+      - "8686:8686" # Lidarr web UI
+      - "6595:6595" # Deemix web UI
+    volumes:
+      - ./config:/config
+      - ./config_deemix:/config_deemix
+      - /path/to/Music:/music #optional
+      - /path/to/Downloads:/downloads #optional

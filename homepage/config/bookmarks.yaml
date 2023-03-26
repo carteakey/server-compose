@@ -1,0 +1,15 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/en/configs/bookmarks
+
+
+- Developer:
+    - GitHub:
+        - abbr: GH
+          href: https://github.com/
+    - r/selfhosted:
+        - abbr: SH
+          href: https://reddit.com/r/selfhosted
+    - Homepage Docs:
+        - abbr: HP
+          href: https://gethomepage.dev/

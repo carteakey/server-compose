@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  honeygain:
+    container_name: pawns-cli
+    image: iproyal/pawns-cli:latest
+    command: -email=<email> -password=<your_password> -device-name=<your_device> -accept-tos
+    restart: unless-stopped
+
+
+

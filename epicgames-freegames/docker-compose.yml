@@ -1,0 +1,8 @@
+version: "3"
+services:
+  epicgames-freegames:
+    image: charlocharlie/epicgames-freegames
+    volumes:
+      - ./config:/usr/app/config
+    ports:
+      - 4206:3000

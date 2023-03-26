@@ -1,0 +1,21 @@
+version: "3"
+services:
+  sonarqube:
+    image: sonarqube:community
+    hostname: sonarqube
+    container_name: sonarqube
+    environment:
+      SONAR_JDBC_URL: jdbc:postgresql://<your_ip>:5432/your_username
+      SONAR_JDBC_USERNAME: <your_username>
+      SONAR_JDBC_PASSWORD: <your_password>
+    volumes:
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_logs:/opt/sonarqube/logs
+    ports:
+      - "9000:9000"
+
+volumes:
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_logs:

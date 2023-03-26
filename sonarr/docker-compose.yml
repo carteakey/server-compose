@@ -1,0 +1,16 @@
+version: "2.1"
+services:
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Canada/Eastern
+    volumes:
+      - ./config:/config
+      - /path/to/TV:/tv #optional 
+      - /path/to/Downloads:/downloads #optional
+    ports:
+      - 8989:8989
+    restart: unless-stopped

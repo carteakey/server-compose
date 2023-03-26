@@ -1,0 +1,246 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/en/configs/services
+
+# replace <your_local_ip_goes_here> with your system's IP
+
+- Streaming:
+
+    - Plex:
+        icon: plex.png
+        href: http://<your_local_ip_goes_here>:32400
+        description: Movies & TV Shows
+        server: my-docker
+        container: plex
+        widget:
+            type: plex
+            url: http://<your_local_ip_goes_here>:32400
+            key: <your_plex_key>
+
+    - Navidrome:
+        icon: navidrome.png    
+        href: http://<your_local_ip_goes_here>:4533
+        description: Music Streaming
+        server: my-docker
+        container: navidrome-navidrome-1
+        widget:
+            type: navidrome
+            url: http://<your_local_ip_goes_here>:4533
+            user: <your_user>
+            token: <your_token>
+            salt: <your_salt>
+
+- Tools:
+    
+    - Portainer:
+        icon: portainer.png
+        href: https://<your_local_ip_goes_here>:9443
+        description: Manage Containers
+        server: my-docker
+        container: portainer-portainer-1
+        widget:
+            type: portainer
+            url: https://<your_local_ip_goes_here>:9443
+            env: 2
+            key: <your_key>
+
+    - Scrutiny:
+            icon: scrutiny.png
+            href: http://<your_local_ip_goes_here>:8081
+            description: HDD Health Check
+            server: my-docker
+            container: scrutiny
+            widget:
+                type: scrutiny  
+                url: http://<your_local_ip_goes_here>:8081
+
+    - WatchTower:
+            icon: watchtower.png
+            description: Docker Image Updater
+            server: my-docker
+            container: watchtower-watchtower-1
+            widget:
+                type: watchtower
+                url: http://<your_local_ip_goes_here>:8080
+                key: <your_key>
+
+    - Prometheus:
+            icon: prometheus.png
+            href: http://<your_local_ip_goes_here>:9090
+            description: Time Series DB
+            server: my-docker
+            container: prometheus
+            widget:
+                type: prometheus
+                url: http://<your_local_ip_goes_here>:9090
+
+    - Grafana:
+            icon: grafana.png
+            href: http://<your_local_ip_goes_here>:3001
+            description: Monitoring
+            server: my-docker
+            container: grafana-grafana-1
+            widget:
+                type: grafana
+                url: http://<your_local_ip_goes_here>:3001
+                username: admin
+                password: <your_password>
+
+    - Node-Exporter:
+            icon: nginx.png
+            href: http://<your_local_ip_goes_here>:9100
+            description: System Metrics
+            server: my-docker
+            container: node_exporter
+   
+    - cAdvisor:
+            icon: cadvisor.png
+            href: http://<your_local_ip_goes_here>:8082
+            description: Docker metrics
+            server: my-docker
+            container: cadvisor
+
+    - Free-Epic-Games:
+        icon: https://upload.wikimedia.org/wikipedia/commons/3/31/Epic_Games_logo.svg
+        href: http://<your_local_ip_goes_here>:4206
+        description: Auto-Grab new freebies.
+        server: my-docker
+        container: epicgames-freegames-epicgames-freegames-1
+
+    - Paperless-ngx:
+        icon: paperless-ng.png
+        href: http://<your_local_ip_goes_here>:8000
+        description: 
+        server: my-docker
+        container: paperless-webserver-1
+        widget:
+            type: paperlessngx  
+            url: http://<your_local_ip_goes_here>:8000
+            username: <your_user>
+            password: <your_password>
+
+      
+- Development:
+
+    - pgAdmin:
+        icon: pgadmin.png
+        href: http://<your_local_ip_goes_here>:5050
+        server: my-docker
+        container: pgadmin_container
+
+    - PostgreSQL:
+        icon: postgres.png
+        href: http://<your_local_ip_goes_here>:5432
+        server: my-docker
+        container: postgres_container
+    
+    - SonarQube:
+        icon: sonarqube.png
+        href: http://<your_local_ip_goes_here>:9000
+        server: my-docker
+        container: sonarqube
+
+
+- Downloads: 
+
+    - Transmission:
+            icon: transmission.png
+            href: http://<your_local_ip_goes_here>:9091
+            description: Download Torrents
+            server: my-docker
+            container: transmission-openvpn-transmission-1 
+            widget:
+                type: transmission
+                url: http://<your_local_ip_goes_here>:9091
+
+    - PyLoad:
+        icon: pyload.png
+        href: http://<your_local_ip_goes_here>:8001
+        description: Dow
+        server: my-docker
+        container: pyload-ng
+        widget:
+            type: pyload
+            url: http://<your_local_ip_goes_here>:8001
+            username: pyload
+            password: pyload
+
+- Media: 
+
+    - Radarr:
+        icon: radarr.png    
+        href: http://<your_local_ip_goes_here>:7878
+        description: Movies for Plex
+        server: my-docker
+        container: radarr
+        widget:
+            type: radarr
+            fields: ['wanted','queued','movies']
+            url: http://<your_local_ip_goes_here>:7878
+            key: <your_key>
+    
+    - Sonarr:
+        icon: sonarr.png    
+        href: http://<your_local_ip_goes_here>:8989
+        description: TV for Plex
+        server: my-docker
+        container: sonarr
+        widget:
+            type: sonarr
+            url: http://<your_local_ip_goes_here>:8989
+            key: <your_key>
+    
+    - Prowlarr:
+        icon: prowlarr.png    
+        href: http://<your_local_ip_goes_here>:9696
+        description: Indexer
+        server: my-docker
+        container: prowlarr
+        widget:
+            type: prowlarr
+            fields: ["enableIndexers", "numberOfGrabs", "numberOfQueries"]
+            url: http://<your_local_ip_goes_here>:9696
+            key: <your_key>
+
+    - Lidarr:
+        icon: lidarr.png    
+        href: http://<your_local_ip_goes_here>:8686
+        description: Music for Plex
+        server: my-docker
+        container: lidarr_deemix-lidarr-1
+        widget:
+            type: lidarr
+            url: http://<your_local_ip_goes_here>:8686
+            key: <your_key>
+
+    - Bazarr:
+        icon: bazarr.png    
+        href: http://<your_local_ip_goes_here>:6767
+        description: Subtitles
+        server: my-docker
+        container: bazarr
+        widget:
+            type: bazarr
+            url: http://<your_local_ip_goes_here>:6767
+            key: <your_key>
+
+    - Overseerr:
+        icon: overseerr.png
+        href: http://<your_local_ip_goes_here>:5055
+        description: Media Discovery
+        server: my-docker
+        container: overseerr
+        widget:
+            type: overseerr
+            url: http://<your_local_ip_goes_here>:5055
+            key: <your_key>
+
+    - Deemix:
+        icon: deemix.png
+        href: http://<your_local_ip_goes_here>:6595
+        description: Deezer Downloader
+        server: my-docker
+        container: lidarr_deemix-lidarr-1
+
+
+    

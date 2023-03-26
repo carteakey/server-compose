@@ -1,0 +1,34 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/en/configs/settings
+
+providers:
+  openweathermap: openweathermapapikey
+  weatherapi: weatherapiapikey
+
+layout:
+  
+  Media:
+    icon: mediathekview
+    style: row
+    columns: 3
+  
+  Tools:
+    icon: teleport
+  
+  Downloads:
+    icon: droppy
+
+  Streaming:
+    icon: d-link-wifi
+
+  Passive:
+    icon: bitcoin
+
+  Development:
+    icon: code
+    style: row
+    columns: 3
+
+
+ 

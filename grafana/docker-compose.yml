@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  grafana:
+      image: grafana/grafana
+      ports:
+        - 3001:3000
+      restart: unless-stopped
+      environment:
+        - GF_PATHS_CONFIG=/etc/grafana/grafana.ini
+      volumes:
+        - ./config/grafana.ini:/etc/grafana/grafana.ini
+        - grafana-data:/var/lib/grafana
+        
+volumes:
+  grafana-data:
+
+networks:
+  default:
+    external: true
+    name: monitoring  

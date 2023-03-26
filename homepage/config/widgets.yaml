@@ -1,0 +1,21 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/en/configs/widgets
+
+- logo:
+    icon: home
+    
+- resources:
+    cpu: true
+    memory: true
+    label: My Server
+
+- resources:    
+    disk: /
+    label: Storage
+
+- search:
+    provider: duckduckgo
+    target: _blank
+
+

@@ -1,0 +1,17 @@
+version: '3.8' 
+services: 
+  cadvisor: 
+    image: gcr.io/cadvisor/cadvisor:latest 
+    container_name: cadvisor 
+    ports: 
+      - 8082:8080 
+    volumes: 
+      - /:/rootfs:ro 
+      - /var/run:/var/run:rw 
+      - /sys:/sys:ro 
+      - /var/snap/docker/common/var-lib-docker:/var/lib/docker:ro 
+
+networks:
+  default:
+    external: true
+    name: monitoring  
