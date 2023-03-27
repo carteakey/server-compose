@@ -5,10 +5,14 @@ A collection of sample [docker compose](https://docs.docker.com/compose/) files 
 
 - Install [Docker](https://docs.docker.com/get-docker/).
 - Download/copy the folders of the respective application(s) you want to install.
-- Replace &lt;parameters&gt; with your values. More details on each application's link.
+- Replace &lt;parameters&gt; with your values. More details on each application's link and README.md of each folder.
 - Spin up the docker image.
 ```bash
 docker compose up -d
+```
+- To stop and remove all containers of the application run:
+```
+docker compose down
 ```
 # Applications 
 :information_source:  _see [awesome-selfhosted](https://github.com/awesome-selfhosted/awesome-selfhosted) for an exhaustive list._
@@ -35,11 +39,12 @@ docker compose up -d
 - [Overseerr](https://overseerr.dev/) - Overseerr is a request management and media discovery tool built to work with your existing Plex ecosystem.([GitHub](https://github.com/sct/overseerr)) 
 
 ## Tools
-- [Portainer](https://github.com/portainer/portainer) - Portainer is a lightweight management UI which allows you to easily manage your Docker containers
+- [Portainer](https://github.com/portainer/portainer) - Portainer is a lightweight management UI which allows you to easily manage your Docker containers.
 - [WatchTower](https://github.com/containrrr/watchtower) - A process for automating Docker container base image updates.
 - [Scrutiny](https://github.com/AnalogJ/scrutiny) - WebUI for smartd S.M.A.R.T monitoring. Health check for hard drives.
 - [Epic Games Store Weekly Free Games](https://github.com/claabs/epicgames-freegames-node) - Automatically login and redeem promotional free games from the Epic Games Store.
 - [pyLoad](https://github.com/pyload/pyload) - Free and Open Source download manager written in Python and designed to be extremely lightweight, easily extensible and fully manageable via web.
+- [changedetection.io](https://github.com/dgtlmoon/changedetection.io/) - Web Site Change Detection, Restock monitoring and notifications.
 
 ## Monitoring
 See [here](https://prometheus.io/docs/guides/cadvisor/) & [here](https://grafana.com/docs/grafana/latest/getting-started/get-started-grafana-prometheus) on how you can use cAdvisor, Prometheus and Grafana to monitor your server's usage.

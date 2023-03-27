@@ -11,7 +11,7 @@ services:
     - "9091:9091"
     # - "8888:8888" # proxy support
   volumes:
-    - /path/to/:/data # where transmission will store the data
+    - /path/to/data/:/data # where transmission will store the data
     - ./:/config # where transmission-home is stored
   environment:
     - OPENVPN_PROVIDER=<your_provider>

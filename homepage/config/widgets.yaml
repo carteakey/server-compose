@@ -3,7 +3,7 @@
 # https://gethomepage.dev/en/configs/widgets
 
 - logo:
-    icon: home
+    icon: homepage
     
 - resources:
     cpu: true
