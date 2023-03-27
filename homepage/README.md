@@ -1,5 +1,7 @@
 # Homepage
 
+![homepage](/_assets/homepage.png)
+
 ## Links:
 - Web UI: http://localhost:3000/
 - Reference: https://gethomepage.dev/en/installation/
