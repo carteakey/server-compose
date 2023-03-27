@@ -1,9 +1,9 @@
 # Homepage
 
 ## Links:
-Web UI: http://localhost:3000/
-Reference: https://gethomepage.dev/en/installation/
-GitHub: https://github.com/benphelps/homepage
+- Web UI: http://localhost:3000/
+- Reference: https://gethomepage.dev/en/installation/
+- GitHub: https://github.com/benphelps/homepage
 ## Compose
 Folder Structure:
 ```

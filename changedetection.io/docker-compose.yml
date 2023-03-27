@@ -5,7 +5,7 @@ services:
       container_name: changedetection
       hostname: changedetection
       volumes:
-        - changedetection-data:/datastore
+        - changedetection-data:/datastore 
 # Configurable proxy list support, see https://github.com/dgtlmoon/changedetection.io/wiki/Proxy-configuration#proxy-list-support
 #        - ./proxies.json:/datastore/proxies.json
 

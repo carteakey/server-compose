@@ -1,9 +1,9 @@
 # Application
 
 ## Links:
-Web UI: http://localhost:<port>/
-Documentation: 
-GitHub:
+- Web UI: http://localhost:<port>/
+- Documentation: 
+- GitHub:
 
 ## Compose
 Folder Structure:
