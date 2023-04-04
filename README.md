@@ -29,8 +29,8 @@ docker compose down
 ## Media Downloaders
  :exclamation: **_Obligatory Piracy Caution Yarrr!_**
 
-- [Transmission-OpenVPN](https://github.com/haugene/docker-transmission-openvpn) - Run [Transmission]()(Torrent Downloader) only when OpenVPN has an active tunnel. All *arr* applications will use it to download media.
-- [Radarr](https://radarr.video/) - Radarr is an independent fork of Sonarr reworked for automatically downloading movies via Usenet and BitTorrent, à la Couchpotato. ([GitHub](https://github.com/Radarr/Radarr))
+- [Transmission-OpenVPN](https://github.com/haugene/docker-transmission-openvpn) - Run [Transmission ]()(Torrent Downloader) only when OpenVPN has an active tunnel. All *arr* applications will use it to download media. 
+- [Radarr](https://radarr.video/) - Radarr is an independent fork of Sonarr reworked for automatically downloading movies via Usenet and BitTorrent, à la Couchpotato. ([GitHub](https://github.com/Radarr/Radarr)) 
 - [Sonarr](https://sonarr.tv/) - Automatic TV Shows downloader and manager for Usenet and BitTorrent. It can grab, sort and rename new episodes and automatically upgrade the quality of files already downloaded when a better quality format becomes available. ([GitHub](https://github.com/Sonarr/Sonarr))
 - [Lidarr-on-steroids](https://github.com/youegraillot/lidarr-on-steroids) -A  modded version of [Lidarr](https://lidarr.audio/) with Native Deemix integration as an indexer and downloader for Lidarr.
 - [Prowlarr](https://wiki.servarr.com/prowlarr) - Prowlarr is an indexer manager/proxy built on the popular *arr* stack to integrate with your various PVR apps.  ([GitHub](https://github.com/Prowlarr/Prowlarr))
