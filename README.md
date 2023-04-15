@@ -46,6 +46,9 @@ docker compose down
 
 - [Plex Media Server](https://www.plex.tv/) - Centralized home media playback system with a powerful central server.
 <a href="plexmediaserver"><img src="_assets/docker-compose.png" height="18" align="top"/></a>
+- [Jellyfin](https://jellyfin.org) - Jellyfin is an alternative to the proprietary Emby and Plex, to provide media from a server to end-user devices via multiple apps.
+<a href="https://github.com/jellyfin/jellyfin"><img src="_assets/github.png" height="18" align="top"/></a>
+<a href="jellyfin"><img src="_assets/docker-compose.png" height="18" align="top"/></a>
 - [Navidrome Music Server](https://www.navidrome.org) - Modern Music Server and Streamer, compatible with Subsonic/Airsonic.
 <a href="https://github.com/navidrome/navidrome"><img src="_assets/github.png" height="18" align="top"/></a>
 <a href="navidrome"><img src="_assets/docker-compose.png" height="18" align="top"/></a>

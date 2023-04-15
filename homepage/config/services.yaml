@@ -17,6 +17,19 @@
             url: http://<your_local_ip_goes_here>:32400
             key: <your_plex_key>
 
+    - Jellyfin:
+        icon: jellyfin.png
+        href: http://<your_local_ip_goes_here>:8096
+        description: Movies & TV Shows
+        server: my-docker
+        container: jellyfin
+        widget:
+            type: jellyfin
+            url: http://<your_local_ip_goes_here>:8096
+            key: <your_jellyfin_api_key>
+            enableBlocks: true # optional, defaults to false
+            enableNowPlaying: true # optional, defaults to true
+
     - Navidrome:
         icon: navidrome.png    
         href: http://<your_local_ip_goes_here>:4533
