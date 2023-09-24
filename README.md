@@ -52,6 +52,10 @@ docker compose down
 - [Navidrome Music Server](https://www.navidrome.org) - Modern Music Server and Streamer, compatible with Subsonic/Airsonic.
 <a href="https://github.com/navidrome/navidrome"><img src="_assets/github.png" height="18" align="top"/></a>
 <a href="navidrome"><img src="_assets/docker-compose.png" height="18" align="top"/></a>
+- [TubeArchivist](https://www.tubearchivist.com/) - Your self hosted YouTube media server. 
+<a href="https://github.com/tubearchivist/tubearchivist"><img src="_assets/github.png" height="18" align="top"/></a>
+<a href="tubearchivist"><img src="_assets/docker-compose.png" height="18" align="top"/></a>
+
 
 ## Media Downloaders
 
