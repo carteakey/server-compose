@@ -86,6 +86,10 @@ docker compose down
 <a href="overseerr"><img src="_assets/docker-compose.png" height="18" align="top"/></a>
 
 ## Tools
+- [Nextcloud]() - A safe home for all your data. Access & share your files, calendars, contacts, mail & more from any device, on your terms.
+<a href="https://github.com/nextcloud/server"><img src="_assets/github.png" height="18" align="top"/></a>
+<a href="nextcloud"><img src="_assets/docker-compose.png" height="18" align="top"/></a>
+
 - [Portainer](https://www.portainer.io) - Portainer is a lightweight management UI which allows you to easily manage your Docker containers.
 <a href="https://github.com/portainer/portainer"><img src="_assets/github.png" height="18" align="top"/></a>
 <a href="portainer"><img src="_assets/docker-compose.png" height="18" align="top"/></a>
