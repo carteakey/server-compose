@@ -86,10 +86,9 @@ docker compose down
 <a href="overseerr"><img src="_assets/docker-compose.png" height="18" align="top"/></a>
 
 ## Tools
-- [Nextcloud]() - A safe home for all your data. Access & share your files, calendars, contacts, mail & more from any device, on your terms.
+- [Nextcloud](https://nextcloud.com/install/#instructions-server) - A safe home for all your data. Access & share your files, calendars, contacts, mail & more from any device, on your terms.
 <a href="https://github.com/nextcloud/server"><img src="_assets/github.png" height="18" align="top"/></a>
 <a href="nextcloud"><img src="_assets/docker-compose.png" height="18" align="top"/></a>
-
 - [Portainer](https://www.portainer.io) - Portainer is a lightweight management UI which allows you to easily manage your Docker containers.
 <a href="https://github.com/portainer/portainer"><img src="_assets/github.png" height="18" align="top"/></a>
 <a href="portainer"><img src="_assets/docker-compose.png" height="18" align="top"/></a>
@@ -129,15 +128,6 @@ See [here](https://prometheus.io/docs/guides/cadvisor/) & [here](https://grafana
 - [Grafana](https://grafana.com/) - Grafana is a multi-platform open source analytics and interactive visualization web application. It provides charts, graphs, and alerts for the web when connected to supported data sources.
 <a href="https://github.com/grafana/grafana"><img src="_assets/github.png" height="18" align="top"/></a>
 <a href="grafana"><img src="_assets/docker-compose.png" height="18" align="top"/></a>
-
-## Development
-
-- [SonarQube](https://docs.sonarqube.org/latest) - SonarQube is a self-managed, automatic code review tool that systematically helps you deliver clean code.
-<a href="https://github.com/SonarSource/sonarqube"><img src="_assets/github.png" height="18" align="top"/></a>
-<a href="sonarqube"><img src="_assets/docker-compose.png" height="18" align="top"/></a>
-- [PostgreSQL + pgAdmin](https://www.postgresql.org/) - PostgreSQL is a powerful, open source object-relational database system. PGAdmin is a web-based GUI tool used to interact with the Postgres database sessions.
-<a href="https://github.com/postgres/postgres"><img src="_assets/github.png" height="18" align="top"/></a>
-<a href="postgres-pgadmin"><img src="_assets/docker-compose.png" height="18" align="top"/></a>
 
 ## Passive Income / Bandwidth Sharing
 
