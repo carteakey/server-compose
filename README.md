@@ -86,6 +86,9 @@ docker compose down
 <a href="overseerr"><img src="_assets/docker-compose.png" height="18" align="top"/></a>
 
 ## Tools
+- [Home Assistant](https://www.home-assistant.io) - 🏡 Open source home automation that puts local control and privacy first. 
+<a href="https://github.com/home-assistant/core"><img src="_assets/github.png" height="18" align="top"/></a>
+<a href="home-assistant"><img src="_assets/docker-compose.png" height="18" align="top"/></a>
 - [Nextcloud](https://nextcloud.com/install/#instructions-server) - A safe home for all your data. Access & share your files, calendars, contacts, mail & more from any device, on your terms.
 <a href="https://github.com/nextcloud/server"><img src="_assets/github.png" height="18" align="top"/></a>
 <a href="nextcloud"><img src="_assets/docker-compose.png" height="18" align="top"/></a>
@@ -101,7 +104,7 @@ docker compose down
 - [Epic Games Store Weekly Free Games](https://hub.docker.com/r/charlocharlie/epicgames-freegames) - Automatically login and redeem promotional free games from the Epic Games Store.
 <a href="https://github.com/claabs/epicgames-freegames-node"><img src="_assets/github.png" height="18" align="top"/></a>
 <a href="epicgames-freegames"><img src="_assets/docker-compose.png" height="18" align="top"/></a>
-- [pyLoad](https://pyload.net) - Free and Open Source download manager written in Python and designed to be extremely lightweight, easily extensible and fully manageable via web.
+- [pyLoad](https://pyload.net) - Free & Open Source lightweight download manager written in Python, easily extensible and fully manageable via web.
 <a href="https://github.com/pyload/pyload"><img src="_assets/github.png" height="18" align="top"/></a>
 <a href="pyload"><img src="_assets/docker-compose.png" height="18" align="top"/></a>
 - [changedetection.io](https://github.com/dgtlmoon/changedetection.io) - Web Site Change Detection, Restock monitoring and notifications.
