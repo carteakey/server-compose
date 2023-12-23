@@ -25,7 +25,7 @@ docker compose up -d
 docker compose down
 ```
 
-Alternatively, use the excellent [Dockge](#dockge). to manage your stacks.
+Alternatively, use the excellent [Dockge](#dockge) to manage your stacks.
 
 # Applications
 
@@ -56,6 +56,8 @@ Sure, I'll merge all the entries into one comprehensive table with the category 
 |                    | [pyLoad](https://pyload.net)                 | Free & Open Source lightweight download manager written in Python. | [GitHub](https://github.com/pyload/pyload) | [Compose](pyload) |
 |                    | [changedetection.io](https://github.com/dgtlmoon/changedetection.io) | Web Site Change Detection and notifications. | [GitHub](https://github.com/dgtlmoon/changedetection.io) | [Compose](changedetection.io) |
 |                    | [FileFlows](https://fileflows.com/)          | Fileflows lets you process files through a simple rule flow. | [GitHub](https://github.com/revenz/FileFlows) | [Compose](fileflows) |
+| **Finance**        | [Firefly III](https://www.firefly-iii.org) | "Firefly III" is a (self-hosted) manager for your personal finances. | [GitHub](https://github.com/firefly-iii/firefly-iii/) | [Compose](firefly-iii) |
+|                    | [Actual Budget](https://actualbudget.org)                 | Actual Budget is a super fast and privacy-focused app for managing your finances. | [GitHub](https://github.com/actualbudget/actual) | [Compose](actual-budget) |
 | **Server Monitoring**     | [cAdvisor](https://github.com/google/cadvisor) | Analyzes resource usage and performance of running docker containers. | [GitHub](https://github.com/google/cadvisor) | [Compose](cadvisor) |
 |                    | [Prometheus](https://prometheus.io/)         | Open-source monitoring system. | [GitHub](https://github.com/prometheus/prometheus) | [Compose](prometheus) |
 |                    | [node-exporter](https://github.com/prometheus/node_exporter) | Exposes hardware- and kernel-related metrics. | [GitHub](https://github.com/prometheus/node_exporter) | [Compose](node-exporter) |
