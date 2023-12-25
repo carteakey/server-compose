@@ -30,11 +30,11 @@ Alternatively, use the excellent [Dockge](#dockge) to manage your stacks.
 # Applications
 
 :information_source: _Check out [awesome-selfhosted](https://github.com/awesome-selfhosted/awesome-selfhosted) for an exhaustive list._
-Sure, I'll merge all the entries into one comprehensive table with the category as the first column:
 
 | Category           | Name                                         | Description | GitHub Repo | Docker Compose Link |
 |--------------------|----------------------------------------------|-------------|-------------|---------------------|
 | **Dashboard**      | [Homepage by benphelps](https://github.com/benphelps/homepage) | A highly customizable homepage (or startpage / application dashboard) with Docker and service API integrations. Sample configurations are present for most of the listed apps. | [GitHub](https://github.com/benphelps/homepage) | [Compose](homepage) |
+| **Home Automation**| [Home Assistant](https://www.home-assistant.io) | Open source home automation that puts local control and privacy first. | [GitHub](https://github.com/home-assistant/core) | [Compose](home-assistant) |
 | **Media Streaming**| [Plex Media Server](https://www.plex.tv/)    | Centralized home media playback system with a powerful central server. | | [Compose](plexmediaserver) |
 |                    | [Jellyfin](https://jellyfin.org)             | Jellyfin is an alternative to the proprietary Emby and Plex, to provide media from a server to end-user devices via multiple apps. | [GitHub](https://github.com/jellyfin/jellyfin) | [Compose](jellyfin) |
 |                    | [Navidrome Music Server](https://www.navidrome.org) | Modern Music Server and Streamer, compatible with Subsonic/Airsonic. | [GitHub](https://github.com/navidrome/navidrome) | [Compose](navidrome) |
@@ -47,8 +47,9 @@ Sure, I'll merge all the entries into one comprehensive table with the category 
 |                    | [Bazarr](https://www.bazarr.media/)          | Companion application to Sonarr and Radarr that manages and downloads subtitles. | [GitHub](https://github.com/morpheus65535/bazarr) | [Compose](bazarr) |
 |                    | [Deemix](https://deemix.app/)                | Barebone deezer downloader library. | | [Compose](deemix) |
 |                    | [Overseerr](https://overseerr.dev/)          | Request management and media discovery tool for Plex ecosystem. | [GitHub](https://github.com/sct/overseerr) | [Compose](overseerr) |
-| **Home Automation**| [Home Assistant](https://www.home-assistant.io) | Open source home automation that puts local control and privacy first. | [GitHub](https://github.com/home-assistant/core) | [Compose](home-assistant) |
+| **File Sharing & Backup**| [Immich](https://immich.app/) | High performance self-hosted photo and video backup solution. | [GitHub](https://github.com/immich-app/immich) | [Compose](immich) |
 |                    | [Nextcloud](https://nextcloud.com/install/#instructions-server) | A safe home for all your data. Access & share your files, calendars, contacts, mail & more from any device, on your terms. | [GitHub](https://github.com/nextcloud/server) | [Compose](nextcloud) |
+|                    | [Paperless-ngx](https://docs.paperless-ngx.com) | Paperless-ngx is a document management system that transforms your physical documents into a searchable online archive so you can keep, well, less paper. | [GitHub](https://github.com/paperless-ngx/paperless-ngx) | [Compose](paperless-ngx) |
 | **Container Management**|[Portainer](https://www.portainer.io)        | Lightweight management UI for Docker containers. | [GitHub](https://github.com/portainer/portainer) | [Compose](portainer) |
 |                    | [WatchTower](https://containrrr.dev/watchtower/) | Automates Docker container base image updates. | [GitHub](https://github.com/containrrr/watchtower) | [Compose](watchtower) |
 |                    | <a id="dockge"></a>[Dockge](https://dockge.kuma.pet) | A fancy, easy-to-use and reactive self-hosted docker compose.yaml stack-oriented manager. | [GitHub](https://github.com/louislam/dockge) | [Compose](dockge) |
@@ -72,8 +73,8 @@ Sure, I'll merge all the entries into one comprehensive table with the category 
 # Roadmap
 
 - List will continue to grow, but will try to not be overwhelming.
-- Website (Maybe)
 - Individual README files for each compose.
+- Website (Maybe).
 
 # Contribution.
 
