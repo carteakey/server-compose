@@ -1,12 +1,11 @@
-version: "3.8"
-
 #
-# WARNING: Make sure to use the docker-compose.yml of the current release:
+# WARNING: To install Immich, follow our guide: https://docs.immich.app/install/docker-compose
+#
+# Make sure to use the docker-compose.yml of the current release:
 #
 # https://github.com/immich-app/immich/releases/latest/download/docker-compose.yml
 #
 # The compose file on main may not be compatible with the latest release.
-#
 
 name: immich
 
@@ -14,63 +13,64 @@ services:
   immich-server:
     container_name: immich_server
     image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
-    command: [ "start.sh", "immich" ]
+    # extends:
+    #   file: hwaccel.transcoding.yml
+    #   service: cpu # set to one of [nvenc, quicksync, rkmpp, vaapi, vaapi-wsl] for accelerated transcoding
     volumes:
-      - ${UPLOAD_LOCATION}:/usr/src/app/upload
+      # Do not edit the next line. If you want to change the media storage location on your system, edit the value of UPLOAD_LOCATION in the .env file
+      - ${UPLOAD_LOCATION}:/data
       - /etc/localtime:/etc/localtime:ro
     env_file:
       - .env
     ports:
-      - 2283:3001
+      - '2283:2283'
     depends_on:
       - redis
       - database
     restart: always
-
-  immich-microservices:
-    container_name: immich_microservices
-    image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
-    # extends:
-    #   file: hwaccel.yml
-    #   service: hwaccel
-    command: [ "start.sh", "microservices" ]
-    volumes:
-      - ${UPLOAD_LOCATION}:/usr/src/app/upload
-      - /etc/localtime:/etc/localtime:ro
-    env_file:
-      - .env
-    depends_on:
-      - redis
-      - database
-    restart: always
+    healthcheck:
+      disable: false
 
   immich-machine-learning:
     container_name: immich_machine_learning
+    # For hardware acceleration, add one of -[armnn, cuda, rocm, openvino, rknn] to the image tag.
+    # Example tag: ${IMMICH_VERSION:-release}-cuda
     image: ghcr.io/immich-app/immich-machine-learning:${IMMICH_VERSION:-release}
+    # extends: # uncomment this section for hardware acceleration - see https://docs.immich.app/features/ml-hardware-acceleration
+    #   file: hwaccel.ml.yml
+    #   service: cpu # set to one of [armnn, cuda, rocm, openvino, openvino-wsl, rknn] for accelerated inference - use the `-wsl` version for WSL2 where applicable
     volumes:
       - model-cache:/cache
     env_file:
       - .env
     restart: always
+    healthcheck:
+      disable: false
 
   redis:
     container_name: immich_redis
-    image: redis:6.2-alpine@sha256:b6124ab2e45cc332e16398022a411d7e37181f21ff7874835e0180f56a09e82a
+    image: docker.io/valkey/valkey:9@sha256:546304417feac0874c3dd576e0952c6bb8f06bb4093ea0c9ca303c73cf458f63
+    healthcheck:
+      test: redis-cli ping || exit 1
     restart: always
 
   database:
     container_name: immich_postgres
-    image: tensorchord/pgvecto-rs:pg14-v0.1.11@sha256:0335a1a22f8c5dd1b697f14f079934f5152eaaa216c09b61e293be285491f8ee
-    env_file:
-      - .env
+    image: ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0@sha256:bcf63357191b76a916ae5eb93464d65c07511da41e3bf7a8416db519b40b1c23
     environment:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_DB: ${DB_DATABASE_NAME}
+      POSTGRES_INITDB_ARGS: '--data-checksums'
+      # Uncomment the DB_STORAGE_TYPE: 'HDD' var if your database isn't stored on SSDs
+      # DB_STORAGE_TYPE: 'HDD'
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      # Do not edit the next line. If you want to change the database storage location on your system, edit the value of DB_DATA_LOCATION in the .env file
+      - ${DB_DATA_LOCATION}:/var/lib/postgresql/data
+    shm_size: 128mb
     restart: always
+    healthcheck:
+      disable: false
 
 volumes:
-  pgdata:
   model-cache:

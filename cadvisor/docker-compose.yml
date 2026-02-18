@@ -1,4 +1,3 @@
-version: '3.8' 
 services: 
   cadvisor: 
     image: gcr.io/cadvisor/cadvisor:latest 

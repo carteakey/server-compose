@@ -1,4 +1,3 @@
-version: "3.3"
 services:
   dockerproxy:
       image: ghcr.io/tecnativa/docker-socket-proxy:latest

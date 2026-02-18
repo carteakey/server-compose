@@ -1,4 +1,3 @@
-version: '3.3'
 
 #
 # The Firefly III Data Importer will ask you for the Firefly III URL and a "Client ID".

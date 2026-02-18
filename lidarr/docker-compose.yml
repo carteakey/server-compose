@@ -1,4 +1,3 @@
-version: "2.1"
 services:
   lidarr:
     image: lscr.io/linuxserver/lidarr:latest

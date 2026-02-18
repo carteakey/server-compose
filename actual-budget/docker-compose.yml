@@ -1,4 +1,3 @@
-version: '3'
 services:
   actual_server:
     image: docker.io/actualbudget/actual-server:latest
@@ -10,6 +9,7 @@ services:
       # Uncomment any of the lines below to set configuration options.
       # - ACTUAL_HTTPS_KEY=/data/selfhost.key
       # - ACTUAL_HTTPS_CERT=/data/selfhost.crt
+      # - ACTUAL_PORT=5006
       # - ACTUAL_UPLOAD_FILE_SYNC_SIZE_LIMIT_MB=20
       # - ACTUAL_UPLOAD_SYNC_ENCRYPTED_FILE_SYNC_SIZE_LIMIT_MB=50
       # - ACTUAL_UPLOAD_FILE_SIZE_LIMIT_MB=20
@@ -19,4 +19,11 @@ services:
       # Change './actual-data' below to the path to the folder you want Actual to store its data in on your server.
       # '/data' is the path Actual will look for its files in by default, so leave that as-is.
       - ./actual-data:/data
+    healthcheck:
+      # Enable health check for the instance
+      test: ["CMD-SHELL", "node src/scripts/health-check.js"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
     restart: unless-stopped
