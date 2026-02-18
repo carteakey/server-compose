@@ -1,0 +1,119 @@
+# =============================================================================
+# services.yaml — Upstream source registry for auto-pulling compose files
+# =============================================================================
+#
+# Source types:
+#   github_release — fetch from the latest GitHub release asset
+#   github_raw     — fetch raw file from a specific branch/path
+#   url            — fetch from an arbitrary URL
+#
+# Fields:
+#   source_type   (required) — one of the above
+#   repo          (required for github_*) — owner/repo
+#   asset         (required for github_release) — filename of the release asset
+#   branch        (optional for github_raw, default: main) — branch name
+#   path          (required for github_raw) — path within the repo
+#   url           (required for url type) — direct download URL
+#   compose_file  (optional, default: docker-compose.yml) — local filename
+# =============================================================================
+
+services:
+
+  # ── Media Streaming ──────────────────────────────────────────────────────
+
+  tubearchivist:
+    source_type: github_raw
+    repo: tubearchivist/tubearchivist
+    branch: master
+    path: docker-compose.yml
+
+  # ── Media Downloaders ───────────────────────────────────────────────────
+
+  overseerr:
+    source_type: github_raw
+    repo: sct/overseerr
+    branch: develop
+    path: docker-compose.yml
+
+  lidarr-on-steroids:
+    source_type: github_raw
+    repo: youegraillot/lidarr-on-steroids
+    branch: main
+    path: docker-compose.yml
+
+  # ── File Sharing & Backup ───────────────────────────────────────────────
+
+  immich:
+    source_type: github_release
+    repo: immich-app/immich
+    asset: docker-compose.yml
+
+  paperless-ngx:
+    source_type: github_raw
+    repo: paperless-ngx/paperless-ngx
+    branch: main
+    path: docker/compose/docker-compose.postgres.yml
+
+  nextcloud:
+    source_type: github_raw
+    repo: nextcloud/docker
+    branch: main
+    path: .examples/docker-compose/insecure/postgres/apache/docker-compose.yml
+
+  # ── Container Management ────────────────────────────────────────────────
+
+  dockge:
+    source_type: github_raw
+    repo: louislam/dockge
+    branch: master
+    path: compose.yaml
+
+  # ── Server Monitoring ──────────────────────────────────────────────────
+
+  prometheus:
+    source_type: github_raw
+    repo: vegasbrianc/prometheus
+    branch: master
+    path: docker-compose.yml
+
+  # ── Tools ───────────────────────────────────────────────────────────────
+
+  changedetection.io:
+    source_type: github_raw
+    repo: dgtlmoon/changedetection.io
+    branch: master
+    path: docker-compose.yml
+
+  # ── Finance ─────────────────────────────────────────────────────────────
+
+  firefly-iii:
+    source_type: github_raw
+    repo: firefly-iii/docker
+    branch: main
+    path: docker-compose.yml
+
+  actual-budget:
+    source_type: github_raw
+    repo: actualbudget/actual-server
+    branch: master
+    path: docker-compose.yml
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # The following services do NOT publish standalone docker-compose.yml files
+  # in their upstream repos. They are managed via linuxserver.io images or
+  # have compose examples only embedded in READMEs/docs:
+  #
+  #   jellyfin, radarr, sonarr, prowlarr, bazarr, lidarr,
+  #   grafana, portainer, home-assistant, fileflows
+  #
+  # To track these, you can add a community source or your own fork URL.
+  # ─────────────────────────────────────────────────────────────────────────
+
+  # Add more services here as needed. Services not listed are skipped.
+  # Template:
+  #
+  #   my-service:
+  #     source_type: github_raw      # or github_release or url
+  #     repo: owner/repo
+  #     branch: main
+  #     path: docker-compose.yml

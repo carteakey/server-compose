@@ -69,6 +69,45 @@ Alternatively, use the excellent [Dockge](#dockge) to manage your stacks.
 |                    | [PawnsApp](https://pawns.app/internet-sharing/) | Make passive money online by sharing your internet. | | [Compose](pawnscli) |
 
 
+# Auto-Update Compose Files
+
+The included `update-compose.sh` script can automatically fetch the latest `docker-compose.yml` files from each service's upstream repository.
+
+**Prerequisites:** `bash`, `curl`, `diff` (all standard on Linux).
+
+### Quick Start
+
+```bash
+# Interactive mode — review and approve each change
+./update-compose.sh -i
+
+# Pull latest compose files for all services (shows summary only)
+./update-compose.sh
+
+# Show full diffs of what changed
+./update-compose.sh --verbose
+
+# Preview changes without modifying any files
+./update-compose.sh --dry-run
+
+# Update only a single service
+./update-compose.sh --service immich --verbose
+
+# Pull + restart changed containers
+./update-compose.sh --apply
+```
+
+### Adding a New Service
+
+Add an entry to `services.yaml`:
+
+```yaml
+  my-service:
+    source_type: github_raw      # or github_release or url
+    repo: owner/repo
+    branch: main
+    path: docker-compose.yml
+```
 
 # Roadmap
 
