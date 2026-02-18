@@ -98,13 +98,31 @@ services:
     branch: master
     path: docker-compose.yml
 
+  # ── Media ───────────────────────────────────────────────────────────────
+
+  audiobookshelf:
+    source_type: github_raw
+    repo: advplyr/audiobookshelf
+    branch: master
+    path: docker-compose.yml
+
+  # ── Recipes ─────────────────────────────────────────────────────────────
+
+  tandoor:
+    source_type: github_raw
+    repo: TandoorRecipes/recipes
+    branch: develop
+    path: docs/install/docker/plain/docker-compose.yml
+
   # ─────────────────────────────────────────────────────────────────────────
   # The following services do NOT publish standalone docker-compose.yml files
   # in their upstream repos. They are managed via linuxserver.io images or
   # have compose examples only embedded in READMEs/docs:
   #
   #   jellyfin, radarr, sonarr, prowlarr, bazarr, lidarr,
-  #   grafana, portainer, home-assistant, fileflows
+  #   grafana, portainer, home-assistant, fileflows,
+  #   uptime-kuma, vaultwarden, stirling-pdf, it-tools,
+  #   ollama, speedtest-tracker, gitea
   #
   # To track these, you can add a community source or your own fork URL.
   # ─────────────────────────────────────────────────────────────────────────
@@ -117,3 +135,4 @@ services:
   #     repo: owner/repo
   #     branch: main
   #     path: docker-compose.yml
+
