@@ -1,13 +1,18 @@
-version: "3"
+version: '3.4'
+
 services:
-  lidarr:
+  lidarr-onsteroids:
     image: youegraillot/lidarr-on-steroids
-    restart: unless-stopped
+    build:
+      context: .
+    environment:
+      - FLAC2CUSTOM_ARGS=-a "-vn -c:a libopus -b:a 64k" -e .opus -r '\.mp3$$'
     ports:
       - "8686:8686" # Lidarr web UI
       - "6595:6595" # Deemix web UI
     volumes:
-      - ./config:/config
-      - ./config_deemix:/config_deemix
-      - /path/to/Music:/music #optional
-      - /path/to/Downloads:/downloads #optional
+      - ./tmp/config:/config
+      - ./tmp/config_deemix:/config_deemix
+      - ./tmp/downloads:/downloads
+      - ./tmp/music:/music
+    restart: always
