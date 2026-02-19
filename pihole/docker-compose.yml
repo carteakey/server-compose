@@ -4,9 +4,9 @@ services:
     container_name: pihole
     restart: unless-stopped
     ports:
-      - "53:53/tcp"    # DNS
-      - "53:53/udp"    # DNS
-      - "80:80/tcp"    # Web admin
+      - "54:53/tcp"    # DNS
+      - "55:53/udp"    # DNS
+      - "84:80/tcp"    # Web admin
     volumes:
       - ./etc-pihole:/etc/pihole
       - ./etc-dnsmasq.d:/etc/dnsmasq.d

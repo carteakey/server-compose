@@ -4,9 +4,9 @@ services:
     container_name: traefik
     restart: unless-stopped
     ports:
-      - "80:80"
+      - "86:80"
       - "443:443"
-      - "8080:8080"   # Dashboard (disable in production)
+      - "8092:8080"   # Dashboard (disable in production)
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./config/traefik.yml:/traefik.yml:ro

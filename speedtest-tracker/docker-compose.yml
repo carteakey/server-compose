@@ -4,7 +4,7 @@ services:
     container_name: speedtest-tracker
     restart: unless-stopped
     ports:
-      - "8080:80"
+      - "8090:80"
       - "8443:443"
     volumes:
       - ./config:/config

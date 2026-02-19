@@ -4,6 +4,6 @@ services:
     container_name: uptime-kuma
     restart: unless-stopped
     ports:
-      - "3001:3001"
+      - "3006:3001"
     volumes:
       - ./data:/app/data

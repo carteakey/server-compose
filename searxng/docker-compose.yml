@@ -4,7 +4,7 @@ services:
     container_name: searxng
     restart: unless-stopped
     ports:
-      - "8080:8080"
+      - "8089:8080"
     volumes:
       - ./config:/etc/searxng
     environment:

@@ -19,7 +19,7 @@ services:
       - firefly_iii_upload:/var/www/html/storage/upload
     env_file: .env
     ports:
-      - '80:8080'
+      - '82:8080'
     depends_on:
       - db
   db:

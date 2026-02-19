@@ -18,5 +18,5 @@ services:
           - ./config:/app/config
           - /mnt/hdd:/hdd
       ports:
-          - 3000:3000
+          - 3003:3000
       restart: unless-stopped

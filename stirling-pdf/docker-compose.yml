@@ -4,7 +4,7 @@ services:
     container_name: stirling-pdf
     restart: unless-stopped
     ports:
-      - "8080:8080"
+      - "8091:8080"
     volumes:
       - ./training-data:/usr/share/tessdata
       - ./extra-configs:/configs

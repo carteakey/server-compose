@@ -4,7 +4,7 @@ services:
     container_name: ntfy
     restart: unless-stopped
     ports:
-      - "8080:80"
+      - "8087:80"
     volumes:
       - ./cache:/var/cache/ntfy
       - ./config:/etc/ntfy

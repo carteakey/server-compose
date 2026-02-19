@@ -12,5 +12,5 @@ services:
       - /path/to/temp:/temp
       - /path/to/media:/media
     ports:
-      - 5000:5000
+      - 5002:5000
     restart: unless-stopped
