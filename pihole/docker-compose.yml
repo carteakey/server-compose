@@ -1,0 +1,17 @@
+services:
+  pihole:
+    image: pihole/pihole:latest
+    container_name: pihole
+    restart: unless-stopped
+    ports:
+      - "53:53/tcp"    # DNS
+      - "53:53/udp"    # DNS
+      - "80:80/tcp"    # Web admin
+    volumes:
+      - ./etc-pihole:/etc/pihole
+      - ./etc-dnsmasq.d:/etc/dnsmasq.d
+    environment:
+      - TZ=<your_timezone>
+      - WEBPASSWORD=<your_admin_password>
+    cap_add:
+      - NET_ADMIN

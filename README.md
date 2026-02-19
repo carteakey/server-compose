@@ -34,9 +34,11 @@ Alternatively, use the excellent [Dockge](#dockge) to manage your stacks.
 | Category           | Name                                         | Description | GitHub Repo | Docker Compose Link |
 |--------------------|----------------------------------------------|-------------|-------------|---------------------|
 | **Dashboard**      | [Homepage by benphelps](https://github.com/benphelps/homepage) | A highly customizable homepage (or startpage / application dashboard) with Docker and service API integrations. Sample configurations are present for most of the listed apps. | [GitHub](https://github.com/benphelps/homepage) | [Compose](homepage) |
+|                    | [Homarr](https://homarr.dev/)                | Sleek server dashboard with Docker integration and service widgets. | [GitHub](https://github.com/homarr-labs/homarr) | [Compose](homarr) |
 | **Home Automation**| [Home Assistant](https://www.home-assistant.io) | Open source home automation that puts local control and privacy first. | [GitHub](https://github.com/home-assistant/core) | [Compose](home-assistant) |
 | **Networking**     | [Traefik](https://traefik.io/traefik/)       | Cloud-native reverse proxy with automatic HTTPS and Docker integration. | [GitHub](https://github.com/traefik/traefik) | [Compose](traefik) |
 |                    | [AdGuard Home](https://adguard.com/adguard-home.html) | Network-wide DNS ad blocker and privacy protection. | [GitHub](https://github.com/AdguardTeam/AdGuardHome) | [Compose](adguard-home) |
+|                    | [Pi-hole](https://pi-hole.net/)              | Network-wide DNS ad blocker (alternative to AdGuard Home). | [GitHub](https://github.com/pi-hole/pi-hole) | [Compose](pihole) |
 | **Identity / SSO** | [Authentik](https://goauthentik.io/)         | Identity provider with SSO, LDAP, SAML, and OIDC support. | [GitHub](https://github.com/goauthentik/authentik) | [Compose](authentik) |
 | **Media Streaming**| [Plex Media Server](https://www.plex.tv/)    | Centralized home media playback system with a powerful central server. | | [Compose](plexmediaserver) |
 |                    | [Jellyfin](https://jellyfin.org)             | Jellyfin is an alternative to the proprietary Emby and Plex, to provide media from a server to end-user devices via multiple apps. | [GitHub](https://github.com/jellyfin/jellyfin) | [Compose](jellyfin) |
