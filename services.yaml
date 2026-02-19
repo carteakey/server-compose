@@ -114,6 +114,31 @@ services:
     branch: develop
     path: docs/install/docker/plain/docker-compose.yml
 
+  # ── RSS ──────────────────────────────────────────────────────────────────
+
+  freshrss:
+    source_type: github_raw
+    repo: FreshRSS/FreshRSS
+    branch: edge
+    path: Docker/freshrss/docker-compose.yml
+
+  # ── Notifications ───────────────────────────────────────────────────────
+
+  ntfy:
+    source_type: github_raw
+    repo: binwiederhier/ntfy
+    branch: main
+    path: docker-compose.yml
+
+  # ── Search ──────────────────────────────────────────────────────────────
+
+  searxng:
+    source_type: github_raw
+    repo: searxng/searxng-docker
+    branch: master
+    path: docker-compose.yaml
+    compose_file: docker-compose.yml
+
   # ─────────────────────────────────────────────────────────────────────────
   # The following services do NOT publish standalone docker-compose.yml files
   # in their upstream repos. They are managed via linuxserver.io images or
@@ -122,7 +147,8 @@ services:
   #   jellyfin, radarr, sonarr, prowlarr, bazarr, lidarr,
   #   grafana, portainer, home-assistant, fileflows,
   #   uptime-kuma, vaultwarden, stirling-pdf, it-tools,
-  #   ollama, speedtest-tracker, gitea
+  #   ollama, speedtest-tracker, gitea, traefik,
+  #   adguard-home, authentik, mealie, calibre-web, n8n
   #
   # To track these, you can add a community source or your own fork URL.
   # ─────────────────────────────────────────────────────────────────────────
@@ -135,4 +161,3 @@ services:
   #     repo: owner/repo
   #     branch: main
   #     path: docker-compose.yml
-

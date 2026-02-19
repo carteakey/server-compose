@@ -1,0 +1,60 @@
+services:
+  server:
+    image: ghcr.io/goauthentik/server:latest
+    container_name: authentik-server
+    restart: unless-stopped
+    command: server
+    ports:
+      - "9000:9000"
+      - "9443:9443"
+    volumes:
+      - ./media:/media
+      - ./custom-templates:/templates
+    environment:
+      - AUTHENTIK_SECRET_KEY=<your_secret_key>
+      - AUTHENTIK_REDIS__HOST=redis
+      - AUTHENTIK_POSTGRESQL__HOST=postgresql
+      - AUTHENTIK_POSTGRESQL__USER=authentik
+      - AUTHENTIK_POSTGRESQL__NAME=authentik
+      - AUTHENTIK_POSTGRESQL__PASSWORD=<your_db_password>
+    depends_on:
+      - postgresql
+      - redis
+
+  worker:
+    image: ghcr.io/goauthentik/server:latest
+    container_name: authentik-worker
+    restart: unless-stopped
+    command: worker
+    volumes:
+      - ./media:/media
+      - ./custom-templates:/templates
+    environment:
+      - AUTHENTIK_SECRET_KEY=<your_secret_key>
+      - AUTHENTIK_REDIS__HOST=redis
+      - AUTHENTIK_POSTGRESQL__HOST=postgresql
+      - AUTHENTIK_POSTGRESQL__USER=authentik
+      - AUTHENTIK_POSTGRESQL__NAME=authentik
+      - AUTHENTIK_POSTGRESQL__PASSWORD=<your_db_password>
+    depends_on:
+      - postgresql
+      - redis
+
+  postgresql:
+    image: postgres:16-alpine
+    container_name: authentik-db
+    restart: unless-stopped
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=authentik
+      - POSTGRES_DB=authentik
+      - POSTGRES_PASSWORD=<your_db_password>
+
+  redis:
+    image: redis:alpine
+    container_name: authentik-redis
+    restart: unless-stopped
+    command: --save 60 1 --loglevel warning
+    volumes:
+      - ./redis:/data

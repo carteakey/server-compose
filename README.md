@@ -35,6 +35,9 @@ Alternatively, use the excellent [Dockge](#dockge) to manage your stacks.
 |--------------------|----------------------------------------------|-------------|-------------|---------------------|
 | **Dashboard**      | [Homepage by benphelps](https://github.com/benphelps/homepage) | A highly customizable homepage (or startpage / application dashboard) with Docker and service API integrations. Sample configurations are present for most of the listed apps. | [GitHub](https://github.com/benphelps/homepage) | [Compose](homepage) |
 | **Home Automation**| [Home Assistant](https://www.home-assistant.io) | Open source home automation that puts local control and privacy first. | [GitHub](https://github.com/home-assistant/core) | [Compose](home-assistant) |
+| **Networking**     | [Traefik](https://traefik.io/traefik/)       | Cloud-native reverse proxy with automatic HTTPS and Docker integration. | [GitHub](https://github.com/traefik/traefik) | [Compose](traefik) |
+|                    | [AdGuard Home](https://adguard.com/adguard-home.html) | Network-wide DNS ad blocker and privacy protection. | [GitHub](https://github.com/AdguardTeam/AdGuardHome) | [Compose](adguard-home) |
+| **Identity / SSO** | [Authentik](https://goauthentik.io/)         | Identity provider with SSO, LDAP, SAML, and OIDC support. | [GitHub](https://github.com/goauthentik/authentik) | [Compose](authentik) |
 | **Media Streaming**| [Plex Media Server](https://www.plex.tv/)    | Centralized home media playback system with a powerful central server. | | [Compose](plexmediaserver) |
 |                    | [Jellyfin](https://jellyfin.org)             | Jellyfin is an alternative to the proprietary Emby and Plex, to provide media from a server to end-user devices via multiple apps. | [GitHub](https://github.com/jellyfin/jellyfin) | [Compose](jellyfin) |
 |                    | [Navidrome Music Server](https://www.navidrome.org) | Modern Music Server and Streamer, compatible with Subsonic/Airsonic. | [GitHub](https://github.com/navidrome/navidrome) | [Compose](navidrome) |
@@ -61,6 +64,7 @@ Alternatively, use the excellent [Dockge](#dockge) to manage your stacks.
 |                    | [FileFlows](https://fileflows.com/)          | Fileflows lets you process files through a simple rule flow. | [GitHub](https://github.com/revenz/FileFlows) | [Compose](fileflows) |
 |                    | [Stirling PDF](https://stirlingpdf.io/)      | Self-hosted PDF manipulation tool (merge, split, convert, OCR). | [GitHub](https://github.com/Stirling-Tools/Stirling-PDF) | [Compose](stirling-pdf) |
 |                    | [IT Tools](https://it-tools.tech/)           | Collection of handy developer utilities (hash generators, encoders, etc). | [GitHub](https://github.com/CorentinTh/it-tools) | [Compose](it-tools) |
+|                    | [SearXNG](https://docs.searxng.org/)         | Privacy-respecting meta search engine aggregating 70+ sources. | [GitHub](https://github.com/searxng/searxng) | [Compose](searxng) |
 | **Finance**        | [Firefly III](https://www.firefly-iii.org) | "Firefly III" is a (self-hosted) manager for your personal finances. | [GitHub](https://github.com/firefly-iii/firefly-iii/) | [Compose](firefly-iii) |
 |                    | [Actual Budget](https://actualbudget.org)                 | Actual Budget is a super fast and privacy-focused app for managing your finances. | [GitHub](https://github.com/actualbudget/actual) | [Compose](actual-budget) |
 | **Server Monitoring**     | [cAdvisor](https://github.com/google/cadvisor) | Analyzes resource usage and performance of running docker containers. | [GitHub](https://github.com/google/cadvisor) | [Compose](cadvisor) |
@@ -73,6 +77,11 @@ Alternatively, use the excellent [Dockge](#dockge) to manage your stacks.
 | **AI / LLM**       | [Ollama + Open WebUI](https://ollama.com/)   | Local LLM inference with a ChatGPT-style web interface. | [GitHub](https://github.com/ollama/ollama) | [Compose](ollama) |
 | **Dev Tools**      | [Gitea](https://about.gitea.com/)            | Lightweight self-hosted Git service (GitHub/GitLab alternative). | [GitHub](https://github.com/go-gitea/gitea) | [Compose](gitea) |
 | **Recipes**        | [Tandoor Recipes](https://tandoor.dev/)      | Recipe manager and meal planner for your household. | [GitHub](https://github.com/TandoorRecipes/recipes) | [Compose](tandoor) |
+|                    | [Mealie](https://mealie.io/)                 | Intuitive recipe manager with meal planning and recipe scraping. | [GitHub](https://github.com/mealie-recipes/mealie) | [Compose](mealie) |
+| **Books**          | [Calibre-Web](https://github.com/janeczku/calibre-web) | Web-based ebook management and reader powered by Calibre. | [GitHub](https://github.com/janeczku/calibre-web) | [Compose](calibre-web) |
+| **RSS**            | [FreshRSS](https://freshrss.org/)            | Self-hosted RSS feed aggregator, lightweight and customizable. | [GitHub](https://github.com/FreshRSS/FreshRSS) | [Compose](freshrss) |
+| **Notifications**  | [ntfy](https://ntfy.sh/)                     | Simple push notification service with HTTP API (UnifiedPush). | [GitHub](https://github.com/binwiederhier/ntfy) | [Compose](ntfy) |
+| **Automation**     | [n8n](https://n8n.io/)                       | Workflow automation tool (Zapier/Make alternative) with 400+ integrations. | [GitHub](https://github.com/n8n-io/n8n) | [Compose](n8n) |
 | **Passive Income / Bandwidth Sharing** | [HoneyGain](https://www.honeygain.com/) | Make money by sharing your Internet. | | [Compose](honeygain) |
 |                    | [EarnApp](https://earnapp.com/bandwidth)     | Earn passive income while your devices rest. | | [Compose](earnapp) |
 |                    | [PawnsApp](https://pawns.app/internet-sharing/) | Make passive money online by sharing your internet. | | [Compose](pawnscli) |

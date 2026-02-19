@@ -1,0 +1,14 @@
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    volumes:
+      - ./data:/home/node/.n8n
+    environment:
+      - N8N_SECURE_COOKIE=false
+      # - N8N_BASIC_AUTH_ACTIVE=true
+      # - N8N_BASIC_AUTH_USER=<your_username>
+      # - N8N_BASIC_AUTH_PASSWORD=<your_password>

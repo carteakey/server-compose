@@ -1,0 +1,13 @@
+services:
+  ntfy:
+    image: binwiederhier/ntfy:latest
+    container_name: ntfy
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ./cache:/var/cache/ntfy
+      - ./config:/etc/ntfy
+    command: serve
+    environment:
+      - TZ=<your_timezone>
