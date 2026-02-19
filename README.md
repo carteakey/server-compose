@@ -129,6 +129,18 @@ Add an entry to `services.yaml`:
     path: docker-compose.yml
 ```
 
+# Port Conflict Checker
+
+Many services default to the same host ports (e.g. `8080`). The included `check-ports.sh` script scans all compose files and reports conflicts.
+
+```bash
+# Check for port conflicts
+./check-ports.sh
+
+# Auto-resolve by reassigning duplicate host ports
+./check-ports.sh --fix
+```
+
 # Roadmap
 
 - List will continue to grow, but will try to not be overwhelming.
