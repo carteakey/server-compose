@@ -3,6 +3,19 @@
 # check-ports.sh — Detect and resolve port conflicts across compose files
 # =============================================================================
 
+# This script uses associative arrays (bash 4+). macOS ships bash 3.2, so
+# transparently re-exec under a newer bash if one is on PATH.
+if (( BASH_VERSINFO[0] < 4 )); then
+    for alt in /opt/homebrew/bin/bash /usr/local/bin/bash "$(command -v bash)"; do
+        if [[ -x "$alt" ]] && "$alt" -c '(( BASH_VERSINFO[0] >= 4 ))' 2>/dev/null; then
+            exec "$alt" "$0" "$@"
+        fi
+    done
+    echo "check-ports.sh requires bash 4+ (found ${BASH_VERSION})." >&2
+    echo "Install on macOS with: brew install bash" >&2
+    exit 1
+fi
+
 set -o pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

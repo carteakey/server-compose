@@ -1,0 +1,63 @@
+name: Update compose files
+
+on:
+  schedule:
+    # Mondays at 09:00 UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run update-compose.sh
+        run: ./update-compose.sh --verbose
+        # Exits 0 even if some services fail; we still want to PR whatever
+        # did update.
+        continue-on-error: true
+
+      - name: Drop backup files
+        # update-compose.sh writes .bak.TIMESTAMP copies next to each replaced
+        # file; we don't want those in the PR.
+        run: find . -name '*.bak.*' -type f -delete
+
+      - name: Regenerate static page
+        run: ./gen-page.sh
+
+      - name: Detect changes
+        id: diff
+        run: |
+          if git diff --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            git diff --stat
+          fi
+
+      - name: Open pull request
+        if: steps.diff.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: chore/weekly-compose-updates
+          delete-branch: true
+          title: "chore: weekly compose file updates"
+          commit-message: "chore: pull latest upstream compose files"
+          body: |
+            Automated weekly pull of upstream `docker-compose.yml` files via
+            `update-compose.sh`, plus a regenerated `docs/index.html`.
+
+            **Review diffs carefully before merging** — upstream services may
+            have introduced breaking changes (new env vars, image renames,
+            volume layout changes, etc).
+
+            Triggered by the scheduled workflow. Re-run manually via Actions →
+            "Update compose files" → Run workflow.
+          labels: |
+            automated
+            compose-update

@@ -2,9 +2,7 @@
 
 A collection of sample [docker compose](https://docs.docker.com/compose/) files and configurations of popular [self hosted](https://www.reddit.com/r/selfhosted/) for quick reference! Sensible configurations, ports, and folder structures used wherever possible.
 
-## Stack Architecture
-
-![Architecture Overview](docs/diagrams/architecture-overview.svg)
+**Browse the catalog:** [carteakey.github.io/server-compose](https://carteakey.github.io/server-compose/) — searchable, filterable service index (generated from this README).
 
 # How to Use
 
