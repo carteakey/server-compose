@@ -81,6 +81,7 @@ Alternatively, use the excellent [Dockge](#dockge) to manage your stacks.
 | **Recipes**        | [Tandoor Recipes](https://tandoor.dev/)      | Recipe manager and meal planner for your household. | [GitHub](https://github.com/TandoorRecipes/recipes) | [Compose](tandoor) |
 |                    | [Mealie](https://mealie.io/)                 | Intuitive recipe manager with meal planning and recipe scraping. | [GitHub](https://github.com/mealie-recipes/mealie) | [Compose](mealie) |
 | **Books**          | [Calibre-Web](https://github.com/janeczku/calibre-web) | Web-based ebook management and reader powered by Calibre. | [GitHub](https://github.com/janeczku/calibre-web) | [Compose](calibre-web) |
+| **Notes**          | [Memos](https://usememos.com/)               | Lightweight, privacy-first note-taking and micro-journaling server with a clean UI. | [GitHub](https://github.com/usememos/memos) | [Compose](memos) |
 | **RSS**            | [FreshRSS](https://freshrss.org/)            | Self-hosted RSS feed aggregator, lightweight and customizable. | [GitHub](https://github.com/FreshRSS/FreshRSS) | [Compose](freshrss) |
 | **Notifications**  | [ntfy](https://ntfy.sh/)                     | Simple push notification service with HTTP API (UnifiedPush). | [GitHub](https://github.com/binwiederhier/ntfy) | [Compose](ntfy) |
 | **Automation**     | [n8n](https://n8n.io/)                       | Workflow automation tool (Zapier/Make alternative) with 400+ integrations. | [GitHub](https://github.com/n8n-io/n8n) | [Compose](n8n) |
