@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>server-compose — self-hosted service catalog</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --card: #181b22;
+    --border: #262a33;
+    --text: #e5e7eb;
+    --muted: #8b93a7;
+    --accent: #7aa2f7;
+    --accent-dim: #3d59a1;
+    --radius: 8px;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #fafafa; --card: #ffffff; --border: #e5e7eb;
+      --text: #111827; --muted: #6b7280;
+      --accent: #2563eb; --accent-dim: #dbeafe;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 2rem 1.5rem; background: var(--bg); color: var(--text);
+    font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  header { max-width: 1100px; margin: 0 auto 2rem; }
+  h1 { font-size: 1.75rem; margin: 0 0 .25rem; }
+  .sub { color: var(--muted); font-size: .9rem; }
+  .sub a { color: var(--accent); text-decoration: none; }
+  main { max-width: 1100px; margin: 0 auto; }
+  .controls {
+    position: sticky; top: 0; background: var(--bg); padding: .75rem 0;
+    margin-bottom: 1rem; z-index: 10;
+  }
+  #search {
+    width: 100%; padding: .6rem .9rem; font-size: 1rem;
+    background: var(--card); border: 1px solid var(--border);
+    color: var(--text); border-radius: var(--radius); outline: none;
+  }
+  #search:focus { border-color: var(--accent); }
+  .chips { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .75rem; }
+  .chip {
+    padding: .3rem .7rem; font-size: .8rem; cursor: pointer;
+    background: var(--card); border: 1px solid var(--border);
+    color: var(--muted); border-radius: 999px; user-select: none;
+  }
+  .chip:hover { color: var(--text); }
+  .chip.active {
+    background: var(--accent-dim); border-color: var(--accent); color: var(--accent);
+  }
+  .grid {
+    display: grid; gap: .75rem;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1rem; display: flex;
+    flex-direction: column; gap: .4rem;
+  }
+  .card-head { display: flex; justify-content: space-between; align-items: baseline; gap: .5rem; }
+  .name { font-weight: 600; font-size: 1rem; }
+  .name a { color: var(--text); text-decoration: none; }
+  .name a:hover { color: var(--accent); }
+  .cat { font-size: .7rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; white-space: nowrap; }
+  .desc { color: var(--muted); font-size: .88rem; flex: 1; }
+  .links { display: flex; gap: .75rem; margin-top: .25rem; font-size: .82rem; }
+  .links a { color: var(--accent); text-decoration: none; }
+  .links a:hover { text-decoration: underline; }
+  .empty { color: var(--muted); text-align: center; padding: 3rem 0; }
+  footer { max-width: 1100px; margin: 3rem auto 0; color: var(--muted); font-size: .8rem; text-align: center; }
+</style>
+</head>
+<body>
+<header>
+  <h1>server-compose</h1>
+  <p class="sub">
+    55 self-hosted services with ready-to-use Docker Compose files.
+    <a href="https://github.com/carteakey/server-compose">View on GitHub →</a>
+  </p>
+</header>
+<main>
+  <div class="controls">
+    <input id="search" type="search" placeholder="Search 55 services..." autofocus>
+    <div id="chips" class="chips"></div>
+  </div>
+  <div id="grid" class="grid"></div>
+  <div id="empty" class="empty" hidden>No services match your filter.</div>
+</main>
+<footer>Generated 2026-04-16 22:57 UTC · <a href="https://github.com/carteakey/server-compose">github.com/carteakey/server-compose</a></footer>
+<script>
+const SERVICES = [
+  {"category":"Dashboard","name":"Homepage by benphelps","description":"A highly customizable homepage (or startpage / application dashboard) with Docker and service API integrations. Sample configurations are present for most of the listed apps.","homepage":"https://github.com/benphelps/homepage","github":"https://github.com/benphelps/homepage","compose":"homepage"},
+  {"category":"Dashboard","name":"Homarr","description":"Sleek server dashboard with Docker integration and service widgets.","homepage":"https://homarr.dev/","github":"https://github.com/homarr-labs/homarr","compose":"homarr"},
+  {"category":"Home Automation","name":"Home Assistant","description":"Open source home automation that puts local control and privacy first.","homepage":"https://www.home-assistant.io","github":"https://github.com/home-assistant/core","compose":"home-assistant"},
+  {"category":"Networking","name":"Traefik","description":"Cloud-native reverse proxy with automatic HTTPS and Docker integration.","homepage":"https://traefik.io/traefik/","github":"https://github.com/traefik/traefik","compose":"traefik"},
+  {"category":"Networking","name":"AdGuard Home","description":"Network-wide DNS ad blocker and privacy protection.","homepage":"https://adguard.com/adguard-home.html","github":"https://github.com/AdguardTeam/AdGuardHome","compose":"adguard-home"},
+  {"category":"Networking","name":"Pi-hole","description":"Network-wide DNS ad blocker (alternative to AdGuard Home).","homepage":"https://pi-hole.net/","github":"https://github.com/pi-hole/pi-hole","compose":"pihole"},
+  {"category":"Identity / SSO","name":"Authentik","description":"Identity provider with SSO, LDAP, SAML, and OIDC support.","homepage":"https://goauthentik.io/","github":"https://github.com/goauthentik/authentik","compose":"authentik"},
+  {"category":"Media Streaming","name":"Plex Media Server","description":"Centralized home media playback system with a powerful central server.","homepage":"https://www.plex.tv/","github":"","compose":"plexmediaserver"},
+  {"category":"Media Streaming","name":"Jellyfin","description":"Jellyfin is an alternative to the proprietary Emby and Plex, to provide media from a server to end-user devices via multiple apps.","homepage":"https://jellyfin.org","github":"https://github.com/jellyfin/jellyfin","compose":"jellyfin"},
+  {"category":"Media Streaming","name":"Navidrome Music Server","description":"Modern Music Server and Streamer, compatible with Subsonic/Airsonic.","homepage":"https://www.navidrome.org","github":"https://github.com/navidrome/navidrome","compose":"navidrome"},
+  {"category":"Media Streaming","name":"TubeArchivist","description":"Your self hosted YouTube media server.","homepage":"https://www.tubearchivist.com/","github":"https://github.com/tubearchivist/tubearchivist","compose":"tubearchivist"},
+  {"category":"Media Streaming","name":"Audiobookshelf","description":"Self-hosted audiobook and podcast server.","homepage":"https://www.audiobookshelf.org/","github":"https://github.com/advplyr/audiobookshelf","compose":"audiobookshelf"},
+  {"category":"Media Downloaders","name":"Transmission-OpenVPN","description":"Run Transmission (Torrent Downloader) only when OpenVPN has an active tunnel. All _arr_ applications will use it to download media.","homepage":"https://haugene.github.io/docker-transmission-openvpn/","github":"https://github.com/haugene/docker-transmission-openvpn","compose":"transmission-openvpn"},
+  {"category":"Media Downloaders","name":"Radarr","description":"Radarr is an independent fork of Sonarr reworked for automatically downloading movies via Usenet and BitTorrent, à la Couchpotato.","homepage":"https://radarr.video/","github":"https://github.com/Radarr/Radarr","compose":"radarr"},
+  {"category":"Media Downloaders","name":"Sonarr","description":"Automatic TV Shows downloader and manager for Usenet and BitTorrent.","homepage":"https://sonarr.tv/","github":"https://github.com/Sonarr/Sonarr","compose":"sonarr"},
+  {"category":"Media Downloaders","name":"Lidarr-on-steroids","description":"A modded version of Lidarr with Native Deemix integration as an indexer and downloader for Lidarr.","homepage":"https://github.com/youegraillot/lidarr-on-steroids","github":"https://github.com/youegraillot/lidarr-on-steroids","compose":"lidarr-on-steroids"},
+  {"category":"Media Downloaders","name":"Prowlarr","description":"Indexer manager/proxy built on the popular _arr_ stack to integrate with your PVR apps.","homepage":"https://wiki.servarr.com/prowlarr","github":"https://github.com/Prowlarr/Prowlarr","compose":"prowlarr"},
+  {"category":"Media Downloaders","name":"Bazarr","description":"Companion application to Sonarr and Radarr that manages and downloads subtitles.","homepage":"https://www.bazarr.media/","github":"https://github.com/morpheus65535/bazarr","compose":"bazarr"},
+  {"category":"Media Downloaders","name":"Deemix","description":"Barebone deezer downloader library.","homepage":"https://deemix.app/","github":"","compose":"deemix"},
+  {"category":"Media Downloaders","name":"Overseerr","description":"Request management and media discovery tool for Plex ecosystem.","homepage":"https://overseerr.dev/","github":"https://github.com/sct/overseerr","compose":"overseerr"},
+  {"category":"File Sharing & Backup","name":"Immich","description":"High performance self-hosted photo and video backup solution.","homepage":"https://immich.app/","github":"https://github.com/immich-app/immich","compose":"immich"},
+  {"category":"File Sharing & Backup","name":"Nextcloud","description":"A safe home for all your data. Access & share your files, calendars, contacts, mail & more from any device, on your terms.","homepage":"https://nextcloud.com/install/#instructions-server","github":"https://github.com/nextcloud/server","compose":"nextcloud"},
+  {"category":"File Sharing & Backup","name":"Paperless-ngx","description":"Paperless-ngx is a document management system that transforms your physical documents into a searchable online archive so you can keep, well, less paper.","homepage":"https://docs.paperless-ngx.com","github":"https://github.com/paperless-ngx/paperless-ngx","compose":"paperless-ngx"},
+  {"category":"Password Management","name":"Vaultwarden","description":"Lightweight Bitwarden-compatible password manager server.","homepage":"https://github.com/dani-garcia/vaultwarden","github":"https://github.com/dani-garcia/vaultwarden","compose":"vaultwarden"},
+  {"category":"Container Management","name":"Portainer","description":"Lightweight management UI for Docker containers.","homepage":"https://www.portainer.io","github":"https://github.com/portainer/portainer","compose":"portainer"},
+  {"category":"Container Management","name":"WatchTower","description":"Automates Docker container base image updates.","homepage":"https://containrrr.dev/watchtower/","github":"https://github.com/containrrr/watchtower","compose":"watchtower"},
+  {"category":"Container Management","name":"Dockge","description":"A fancy, easy-to-use and reactive self-hosted docker compose.yaml stack-oriented manager.","homepage":"https://dockge.kuma.pet","github":"https://github.com/louislam/dockge","compose":"dockge"},
+  {"category":"Tools","name":"Epic Games Store Weekly Free Games","description":"Automatically redeem promotional free games from the Epic Games Store.","homepage":"https://hub.docker.com/r/charlocharlie/epicgames-freegames","github":"https://github.com/claabs/epicgames-freegames-node","compose":"epicgames-freegames"},
+  {"category":"Tools","name":"pyLoad","description":"Free & Open Source lightweight download manager written in Python.","homepage":"https://pyload.net","github":"https://github.com/pyload/pyload","compose":"pyload"},
+  {"category":"Tools","name":"changedetection.io","description":"Web Site Change Detection and notifications.","homepage":"https://github.com/dgtlmoon/changedetection.io","github":"https://github.com/dgtlmoon/changedetection.io","compose":"changedetection.io"},
+  {"category":"Tools","name":"FileFlows","description":"Fileflows lets you process files through a simple rule flow.","homepage":"https://fileflows.com/","github":"https://github.com/revenz/FileFlows","compose":"fileflows"},
+  {"category":"Tools","name":"Stirling PDF","description":"Self-hosted PDF manipulation tool (merge, split, convert, OCR).","homepage":"https://stirlingpdf.io/","github":"https://github.com/Stirling-Tools/Stirling-PDF","compose":"stirling-pdf"},
+  {"category":"Tools","name":"IT Tools","description":"Collection of handy developer utilities (hash generators, encoders, etc).","homepage":"https://it-tools.tech/","github":"https://github.com/CorentinTh/it-tools","compose":"it-tools"},
+  {"category":"Tools","name":"SearXNG","description":"Privacy-respecting meta search engine aggregating 70+ sources.","homepage":"https://docs.searxng.org/","github":"https://github.com/searxng/searxng","compose":"searxng"},
+  {"category":"Finance","name":"Firefly III","description":"\"Firefly III\" is a (self-hosted) manager for your personal finances.","homepage":"https://www.firefly-iii.org","github":"https://github.com/firefly-iii/firefly-iii/","compose":"firefly-iii"},
+  {"category":"Finance","name":"Actual Budget","description":"Actual Budget is a super fast and privacy-focused app for managing your finances.","homepage":"https://actualbudget.org","github":"https://github.com/actualbudget/actual","compose":"actual-budget"},
+  {"category":"Server Monitoring","name":"cAdvisor","description":"Analyzes resource usage and performance of running docker containers.","homepage":"https://github.com/google/cadvisor","github":"https://github.com/google/cadvisor","compose":"cadvisor"},
+  {"category":"Server Monitoring","name":"Prometheus","description":"Open-source monitoring system.","homepage":"https://prometheus.io/","github":"https://github.com/prometheus/prometheus","compose":"prometheus"},
+  {"category":"Server Monitoring","name":"node-exporter","description":"Exposes hardware- and kernel-related metrics.","homepage":"https://github.com/prometheus/node_exporter","github":"https://github.com/prometheus/node_exporter","compose":"node-exporter"},
+  {"category":"Server Monitoring","name":"Grafana","description":"Multi-platform open source analytics and interactive visualization web application.","homepage":"https://grafana.com/","github":"https://github.com/grafana/grafana","compose":"grafana"},
+  {"category":"Server Monitoring","name":"Scrutiny","description":"WebUI for smartd S.M.A.R.T monitoring.","homepage":"https://github.com/AnalogJ/scrutiny","github":"https://github.com/AnalogJ/scrutiny","compose":"scrutiny"},
+  {"category":"Server Monitoring","name":"Uptime Kuma","description":"Lightweight and fancy self-hosted monitoring tool.","homepage":"https://uptime.kuma.pet/","github":"https://github.com/louislam/uptime-kuma","compose":"uptime-kuma"},
+  {"category":"Server Monitoring","name":"Speedtest Tracker","description":"Automated internet speed test scheduling with historical graphs.","homepage":"https://docs.speedtest-tracker.dev/","github":"https://github.com/alexjustesen/speedtest-tracker","compose":"speedtest-tracker"},
+  {"category":"AI / LLM","name":"Ollama + Open WebUI","description":"Local LLM inference with a ChatGPT-style web interface.","homepage":"https://ollama.com/","github":"https://github.com/ollama/ollama","compose":"ollama"},
+  {"category":"Dev Tools","name":"Gitea","description":"Lightweight self-hosted Git service (GitHub/GitLab alternative).","homepage":"https://about.gitea.com/","github":"https://github.com/go-gitea/gitea","compose":"gitea"},
+  {"category":"Recipes","name":"Tandoor Recipes","description":"Recipe manager and meal planner for your household.","homepage":"https://tandoor.dev/","github":"https://github.com/TandoorRecipes/recipes","compose":"tandoor"},
+  {"category":"Recipes","name":"Mealie","description":"Intuitive recipe manager with meal planning and recipe scraping.","homepage":"https://mealie.io/","github":"https://github.com/mealie-recipes/mealie","compose":"mealie"},
+  {"category":"Books","name":"Calibre-Web","description":"Web-based ebook management and reader powered by Calibre.","homepage":"https://github.com/janeczku/calibre-web","github":"https://github.com/janeczku/calibre-web","compose":"calibre-web"},
+  {"category":"Notes","name":"Memos","description":"Lightweight, privacy-first note-taking and micro-journaling server with a clean UI.","homepage":"https://usememos.com/","github":"https://github.com/usememos/memos","compose":"memos"},
+  {"category":"RSS","name":"FreshRSS","description":"Self-hosted RSS feed aggregator, lightweight and customizable.","homepage":"https://freshrss.org/","github":"https://github.com/FreshRSS/FreshRSS","compose":"freshrss"},
+  {"category":"Notifications","name":"ntfy","description":"Simple push notification service with HTTP API (UnifiedPush).","homepage":"https://ntfy.sh/","github":"https://github.com/binwiederhier/ntfy","compose":"ntfy"},
+  {"category":"Automation","name":"n8n","description":"Workflow automation tool (Zapier/Make alternative) with 400+ integrations.","homepage":"https://n8n.io/","github":"https://github.com/n8n-io/n8n","compose":"n8n"},
+  {"category":"Passive Income / Bandwidth Sharing","name":"HoneyGain","description":"Make money by sharing your Internet.","homepage":"https://www.honeygain.com/","github":"","compose":"honeygain"},
+  {"category":"Passive Income / Bandwidth Sharing","name":"EarnApp","description":"Earn passive income while your devices rest.","homepage":"https://earnapp.com/bandwidth","github":"","compose":"earnapp"},
+  {"category":"Passive Income / Bandwidth Sharing","name":"PawnsApp","description":"Make passive money online by sharing your internet.","homepage":"https://pawns.app/internet-sharing/","github":"","compose":"pawnscli"}
+];
+const REPO = "https://github.com/carteakey/server-compose";
+
+const grid = document.getElementById("grid");
+const chips = document.getElementById("chips");
+const search = document.getElementById("search");
+const empty = document.getElementById("empty");
+
+let activeCategory = "All";
+
+const categories = ["All", ...Array.from(new Set(SERVICES.map(s => s.category))).sort()];
+for (const cat of categories) {
+  const el = document.createElement("span");
+  el.className = "chip" + (cat === "All" ? " active" : "");
+  el.textContent = cat;
+  el.onclick = () => {
+    activeCategory = cat;
+    document.querySelectorAll(".chip").forEach(c => c.classList.toggle("active", c.textContent === cat));
+    render();
+  };
+  chips.appendChild(el);
+}
+
+function render() {
+  const q = search.value.trim().toLowerCase();
+  const filtered = SERVICES.filter(s => {
+    if (activeCategory !== "All" && s.category !== activeCategory) return false;
+    if (!q) return true;
+    return s.name.toLowerCase().includes(q) || s.description.toLowerCase().includes(q);
+  });
+
+  grid.innerHTML = "";
+  empty.hidden = filtered.length > 0;
+
+  for (const s of filtered) {
+    const card = document.createElement("div");
+    card.className = "card";
+    const nameLink = s.homepage ? `<a href="${s.homepage}" target="_blank" rel="noopener">${s.name}</a>` : s.name;
+    const links = [];
+    if (s.github)  links.push(`<a href="${s.github}" target="_blank" rel="noopener">GitHub</a>`);
+    if (s.compose) links.push(`<a href="${REPO}/tree/main/${s.compose}" target="_blank" rel="noopener">Compose</a>`);
+    card.innerHTML = `
+      <div class="card-head"><span class="name">${nameLink}</span><span class="cat">${s.category}</span></div>
+      <div class="desc">${s.description}</div>
+      <div class="links">${links.join("")}</div>
+    `;
+    grid.appendChild(card);
+  }
+}
+
+search.addEventListener("input", render);
+render();
+</script>
+</body>
+</html>
