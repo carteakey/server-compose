@@ -7,7 +7,7 @@ on:
       - "**/docker-compose.y*ml"
       - "**/compose.y*ml"
       - "diagram-config.yaml"
-      - "scripts/generate-diagram.py"
+      - "_scripts/generate-diagram.py"
   workflow_dispatch:
 
 jobs:
@@ -30,8 +30,8 @@ jobs:
 
       - name: Generate D2 markup
         run: |
-          python3 scripts/generate-diagram.py --config diagram-config.yaml
-          python3 scripts/generate-diagram.py --config diagram-config.yaml --anonymize
+          python3 _scripts/generate-diagram.py --config diagram-config.yaml
+          python3 _scripts/generate-diagram.py --config diagram-config.yaml --anonymize
 
       - name: Render D2 to SVG
         run: |

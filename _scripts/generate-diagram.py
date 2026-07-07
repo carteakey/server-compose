@@ -598,7 +598,7 @@ def main() -> int:
             print("Warning: config file specified but PyYAML is not installed. Using defaults.")
             
     # Default settings
-    ignored_dirs = config.get("ignored_directories", [".git", ".github", "_assets", "scripts", "docs"])
+    ignored_dirs = config.get("ignored_directories", [".git", ".github", "_assets", "_scripts", "docs"])
     
     # 2. Discover compose folders
     print(f"Scanning {root_path} for docker-compose stacks...")

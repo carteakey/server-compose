@@ -1,5 +1,5 @@
 # Configuration for the Docker Compose D2 Diagram Generator
-# Run using: python3 scripts/generate-diagram.py --config diagram-config.yaml
+# Run using: python3 _scripts/generate-diagram.py --config diagram-config.yaml
 
 # The title displayed on the diagram
 title: "Server Compose Architecture Overview"
@@ -12,7 +12,7 @@ ignored_directories:
   - ".git"
   - ".github"
   - "_assets"
-  - "scripts"
+  - "_scripts"
   - "docs"
   - "scratch"
 
