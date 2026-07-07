@@ -4,6 +4,10 @@ A collection of sample [docker compose](https://docs.docker.com/compose/) files 
 
 **Browse the catalog:** [carteakey.github.io/server-compose](https://carteakey.github.io/server-compose/) — searchable, filterable service index (generated from this README).
 
+## Stack Architecture
+
+![Architecture Overview](docs/diagrams/architecture-overview.svg)
+
 # How to Use
 
 - Install [Docker](https://docs.docker.com/get-docker/).
