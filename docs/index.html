@@ -99,11 +99,12 @@
     border-color: var(--accent);
     box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.15);
   }
-  .card-head { display: flex; justify-content: space-between; align-items: baseline; gap: .5rem; }
+  .card-head { display: flex; align-items: center; gap: .75rem; }
+  .card-icon { width: 28px; height: 28px; object-fit: contain; flex-shrink: 0; }
   .name { font-weight: 600; font-size: 1.1rem; letter-spacing: -0.01em; }
   .name a { color: var(--text); text-decoration: none; transition: color 0.2s ease; }
   .name a:hover { color: var(--accent); }
-  .cat { font-size: .7rem; font-weight: 600; color: var(--accent); background: var(--accent-dim); padding: .2rem .5rem; border-radius: 4px; text-transform: uppercase; letter-spacing: .05em; white-space: nowrap; }
+  .cat { margin-left: auto; font-size: .7rem; font-weight: 600; color: var(--accent); background: var(--accent-dim); padding: .2rem .5rem; border-radius: 4px; text-transform: uppercase; letter-spacing: .05em; white-space: nowrap; }
   .desc { color: var(--muted); font-size: .92rem; line-height: 1.6; flex: 1; }
   .links { display: flex; gap: 1rem; margin-top: .5rem; font-size: .85rem; }
   .links a { color: var(--accent); text-decoration: none; font-weight: 600; transition: opacity 0.2s ease; }
@@ -128,7 +129,7 @@
   <div id="grid" class="grid"></div>
   <div id="empty" class="empty" hidden>No services match your filter.</div>
 </main>
-<footer>Generated 2026-07-07 19:38 UTC · <a href="https://github.com/carteakey/server-compose">github.com/carteakey/server-compose</a></footer>
+<footer>Generated 2026-07-07 19:45 UTC · <a href="https://github.com/carteakey/server-compose">github.com/carteakey/server-compose</a></footer>
 <script>
 const SERVICES = [
   {"category":"Dashboard","name":"Homepage by benphelps","description":"A highly customizable homepage (or startpage / application dashboard) with Docker and service API integrations. Sample configurations are present for most of the listed apps.","homepage":"https://github.com/benphelps/homepage","github":"https://github.com/benphelps/homepage","compose":"homepage"},
@@ -243,9 +244,30 @@ function render() {
     const nameLink = s.homepage ? `<a href="${s.homepage}" target="_blank" rel="noopener">${s.name}</a>` : s.name;
     const links = [];
     if (s.github)  links.push(`<a href="${s.github}" target="_blank" rel="noopener">GitHub</a>`);
-    if (s.compose) links.push(`<a href="${REPO}/tree/main/${s.compose}" target="_blank" rel="noopener">Compose Config</a>`);
+    if (s.compose) links.push(`<a href="${REPO}/tree/main/${s.compose}" target="_blank" rel="noopener">Compose</a>`);
+    
+    // Resolve icon name from compose directory or lowercase name with custom overrides
+    const customIcons = {
+      "tandoor": "tandoor-recipes",
+      "tubearchivist": "tube-archivist",
+      "lidarr-on-steroids": "lidarr",
+      "actual-server": "actual-budget",
+      "beszel-agent": "beszel",
+      "cloudflare-tunnel": "cloudflare",
+      "cloudflared": "cloudflare",
+      "changedetection.io": "changedetection"
+    };
+    let iconName = s.compose || s.name.toLowerCase().replace(/[^a-z0-9]/g, "");
+    if (customIcons[iconName]) {
+      iconName = customIcons[iconName];
+    }
+
     card.innerHTML = `
-      <div class="card-head"><span class="name">${nameLink}</span><span class="cat">${s.category}</span></div>
+      <div class="card-head">
+        <img class="card-icon" src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/${iconName}.png" onerror="this.style.display='none'">
+        <span class="name">${nameLink}</span>
+        <span class="cat">${s.category}</span>
+      </div>
       <div class="desc">${s.description}</div>
       <div class="links">${links.join("")}</div>
     `;
