@@ -62,13 +62,8 @@ fleet: "Services registry" {
     firecrawl: "firecrawl" {
       class: stack
       grid-columns: 2
-      api: "api (3002)" {
-        class: icon
-        shape: image
-        width: 80
-        height: 80
-        icon: ${di}/firecrawl.svg
-      }
+      api: "api (3002)"
+      api.class: service
       playwright_service: "playwright-service"
       playwright_service.class: service
       redis: "redis" {
@@ -528,7 +523,7 @@ fleet: "Services registry" {
         shape: image
         width: 80
         height: 80
-        icon: ${di}/deemix.svg
+        icon: ${dipng}/deemix.png
       }
     }
 
@@ -678,7 +673,7 @@ fleet: "Services registry" {
         shape: image
         width: 80
         height: 80
-        icon: ${di}/tubearchivist.svg
+        icon: ${dipng}/tube-archivist.png
       }
       archivist_redis: "archivist-redis" {
         class: icon
@@ -692,7 +687,7 @@ fleet: "Services registry" {
         shape: image
         width: 80
         height: 80
-        icon: ${di}/tubearchivist.svg
+        icon: ${dipng}/tube-archivist.png
       }
     }
 
@@ -825,13 +820,8 @@ fleet: "Services registry" {
     earnapp: "earnapp" {
       class: stack
       grid-columns: 1
-      app: "app" {
-        class: icon
-        shape: image
-        width: 80
-        height: 80
-        icon: ${di}/earnapp.svg
-      }
+      app: "app"
+      app.class: service
     }
 
     honeygain: "honeygain" {
@@ -842,7 +832,7 @@ fleet: "Services registry" {
         shape: image
         width: 80
         height: 80
-        icon: ${di}/honeygain.svg
+        icon: ${dipng}/honeygain.png
       }
     }
 
@@ -854,7 +844,7 @@ fleet: "Services registry" {
         shape: image
         width: 80
         height: 80
-        icon: ${di}/honeygain.svg
+        icon: ${dipng}/honeygain.png
       }
     }
 
@@ -954,7 +944,7 @@ fleet: "Services registry" {
         shape: image
         width: 80
         height: 80
-        icon: ${di}/cadvisor.svg
+        icon: ${dipng}/cadvisor.png
       }
     }
 
@@ -992,7 +982,7 @@ fleet: "Services registry" {
         shape: image
         width: 80
         height: 80
-        icon: ${di}/cadvisor.svg
+        icon: ${dipng}/cadvisor.png
       }
       grafana: "grafana (3005)" {
         class: icon
@@ -1037,7 +1027,7 @@ fleet: "Services registry" {
         shape: image
         width: 80
         height: 80
-        icon: ${di}/speedtest-tracker.svg
+        icon: ${dipng}/speedtest-tracker.png
       }
     }
 
@@ -1079,7 +1069,7 @@ fleet: "Services registry" {
         shape: image
         width: 80
         height: 80
-        icon: ${di}/epicgames-freegames.svg
+        icon: ${di}/epic-games.svg
       }
     }
 
