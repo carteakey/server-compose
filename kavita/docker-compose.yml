@@ -1,0 +1,13 @@
+services:
+  kavita:
+    image: jvmilazz0/kavita:latest
+    container_name: kavita
+    volumes:
+      - ./books:/books
+      - ./config:/kavita/config
+    environment:
+      - TZ=UTC
+      - DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=true
+    ports:
+      - "5001:5000"
+    restart: unless-stopped

@@ -1,0 +1,45 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: windmill-db
+    restart: unless-stopped
+    volumes:
+      - windmill_db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: windmill_secure_password # Change this!
+      POSTGRES_DB: windmill
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  server:
+    image: ghcr.io/windmill-labs/windmill:latest
+    container_name: windmill-server
+    restart: unless-stopped
+    ports:
+      - "8005:8000"
+    environment:
+      - DATABASE_URL=postgres://postgres:windmill_secure_password@db:5432/windmill?sslmode=disable
+      - MODE=server
+    depends_on:
+      db:
+        condition: service_healthy
+
+  worker:
+    image: ghcr.io/windmill-labs/windmill:latest
+    container_name: windmill-worker
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=postgres://postgres:windmill_secure_password@db:5432/windmill?sslmode=disable
+      - MODE=worker
+      - WORKER_GROUP=default
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+volumes:
+  windmill_db_data:

@@ -1,0 +1,33 @@
+services:
+  playwright-service:
+    image: ghcr.io/firecrawl/playwright-service:latest
+    container_name: firecrawl-playwright
+    restart: unless-stopped
+    environment:
+      PORT: 3000
+      MAX_CONCURRENT_PAGES: 10
+    cpus: 2.0
+    mem_limit: 4G
+
+  api:
+    image: ghcr.io/firecrawl/firecrawl:latest
+    container_name: firecrawl-api
+    restart: unless-stopped
+    environment:
+      PORT: 3002
+      REDIS_URL: redis://redis:6379
+      PLAYWRIGHT_MICROSERVICE_URL: http://playwright-service:3000/scrape
+      USE_DB_AUTHENTICATION: "false"
+    depends_on:
+      - redis
+      - playwright-service
+    ports:
+      - "3002:3002"
+    cpus: 4.0
+    mem_limit: 8G
+
+  redis:
+    image: redis:alpine
+    container_name: firecrawl-redis
+    restart: unless-stopped
+    command: redis-server --bind 0.0.0.0

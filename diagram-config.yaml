@@ -1,0 +1,51 @@
+# Configuration for the Docker Compose D2 Diagram Generator
+# Run using: python3 scripts/generate-diagram.py --config diagram-config.yaml
+
+# The title displayed on the diagram
+title: "Server Compose Architecture Overview"
+
+# Layout direction: down, up, left, right
+direction: down
+
+# Directories to skip when scanning for compose files
+ignored_directories:
+  - ".git"
+  - ".github"
+  - "_assets"
+  - "scripts"
+  - "docs"
+  - "scratch"
+
+# Custom Category override mapping for folders.
+# If a folder isn't listed here, the script tries to extract the category 
+# from the README.md table. If that fails too, it falls back to 'Other Services'.
+categories:
+  actual-budget: "Finance"
+  changedetection.io: "Tools"
+  media-server: "Media"
+
+# Service-specific custom icons. 
+# Overrides standard rules. Supports dashboard-icons variable substitution:
+# ${di} -> homarr-labs svg repository
+# ${dipng} -> homarr-labs png repository
+# ${sh} -> selfhst svg repository
+# ${si} -> simpleicons CDN
+service_icons:
+  actual-budget: "${di}/actual-budget.svg"
+  changedetection.io: "${di}/changedetection.svg"
+
+# Connections to draw between services (optional)
+# Uses the folder names of the compose stacks.
+connections:
+  - from: "traefik"
+    to: "homepage"
+    label: "Reverse Proxy"
+  - from: "prometheus"
+    to: "grafana"
+    label: "Scrapes Metrics"
+  - from: "sonarr"
+    to: "transmission-openvpn"
+    label: "Downloads Torrent"
+  - from: "radarr"
+    to: "transmission-openvpn"
+    label: "Downloads Torrent"

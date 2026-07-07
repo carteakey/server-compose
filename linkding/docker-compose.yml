@@ -1,0 +1,9 @@
+services:
+  linkding:
+    container_name: linkding
+    image: sissbruecker/linkding:latest
+    ports:
+      - "9099:9090"
+    volumes:
+      - ./data:/etc/linkding/data
+    restart: unless-stopped

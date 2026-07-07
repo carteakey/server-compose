@@ -1,0 +1,1190 @@
+# Generated D2 Architecture Diagram
+vars: {
+  di: https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg
+  dipng: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png
+  sh: https://raw.githubusercontent.com/selfhst/icons/main/svg
+  si: https://cdn.simpleicons.org
+}
+
+direction: down
+
+title: "Server Compose Architecture Overview" {
+  shape: text
+  near: top-center
+  style.font-size: 40
+  style.bold: true
+}
+
+classes: {
+  fleet: {
+    style.fill: "#f8fafc"
+    style.stroke: "#64748b"
+    style.stroke-width: 3
+    style.border-radius: 16
+    style.font-size: 28
+    style.bold: true
+  }
+  category: {
+    style.fill: "#f1f5f9"
+    style.stroke: "#cbd5e1"
+    style.stroke-width: 2
+    style.border-radius: 12
+    style.font-size: 24
+    style.bold: true
+  }
+  stack: {
+    style.fill: "#ffffff"
+    style.stroke: "#cbd5e1"
+    style.border-radius: 8
+    style.font-size: 20
+  }
+  service: {
+    style.fill: "#f0f9ff"
+    style.stroke: "#0ea5e9"
+    style.border-radius: 6
+    style.font-size: 16
+  }
+  icon: {
+    style.font-size: 16
+    style.stroke: "transparent"
+    style.fill: "transparent"
+  }
+}
+
+fleet: "Services registry" {
+  class: fleet
+  grid-columns: 3
+
+  ai_llm: "AI / LLM" {
+    class: category
+    grid-columns: 2
+
+    firecrawl: "firecrawl" {
+      class: stack
+      grid-columns: 2
+      api: "api (3002)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/firecrawl.svg
+      }
+      playwright_service: "playwright-service"
+      playwright_service.class: service
+      redis: "redis" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/redis.svg
+      }
+    }
+
+    ollama: "ollama" {
+      class: stack
+      grid-columns: 1
+      ollama: "ollama (11434)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/ollama.svg
+      }
+      open_webui: "open-webui (3004)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/open-webui.svg
+      }
+    }
+
+  }
+
+  automation: "Automation" {
+    class: category
+    grid-columns: 2
+
+    n8n: "n8n" {
+      class: stack
+      grid-columns: 1
+      n8n: "n8n (5678)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/n8n.svg
+      }
+    }
+
+  }
+
+  books: "Books" {
+    class: category
+    grid-columns: 2
+
+    calibre_web: "calibre-web" {
+      class: stack
+      grid-columns: 1
+      calibre_web: "calibre-web (8083)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/calibre-web.svg
+      }
+    }
+
+    kavita: "kavita" {
+      class: stack
+      grid-columns: 1
+      kavita: "kavita (5001)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/kavita.svg
+      }
+    }
+
+  }
+
+  container_management: "Container Management" {
+    class: category
+    grid-columns: 2
+
+    dockge: "dockge" {
+      class: stack
+      grid-columns: 1
+      dockge: "dockge (5001)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/dockge.svg
+      }
+    }
+
+    portainer: "portainer" {
+      class: stack
+      grid-columns: 1
+      portainer: "portainer (9444)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/portainer.svg
+      }
+    }
+
+    watchtower: "watchtower" {
+      class: stack
+      grid-columns: 1
+      watchtower: "watchtower (8094)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/watchtower.svg
+      }
+    }
+
+  }
+
+  dashboard: "Dashboard" {
+    class: category
+    grid-columns: 2
+
+    homarr: "homarr" {
+      class: stack
+      grid-columns: 1
+      homarr: "homarr (7575)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/homarr.svg
+      }
+    }
+
+    homepage: "homepage" {
+      class: stack
+      grid-columns: 1
+      dockerproxy: "dockerproxy (2375)"
+      dockerproxy.class: service
+      homepage: "homepage (3003)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/homarr.svg
+      }
+    }
+
+  }
+
+  dev_tools: "Dev Tools" {
+    class: category
+    grid-columns: 2
+
+    gitea: "gitea" {
+      class: stack
+      grid-columns: 1
+      gitea: "gitea (2222, 3002)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/gitea.svg
+      }
+    }
+
+    windmill: "windmill" {
+      class: stack
+      grid-columns: 2
+      db: "db"
+      db.class: service
+      server: "server (8005)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/windmill.svg
+      }
+      worker: "worker" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/windmill.svg
+      }
+    }
+
+  }
+
+  file_sharing_backup: "File Sharing & Backup" {
+    class: category
+    grid-columns: 2
+
+    immich: "immich" {
+      class: stack
+      grid-columns: 2
+      database: "database"
+      database.class: service
+      immich_machine_learning: "immich-machine-learning" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/immich.svg
+      }
+      immich_server: "immich-server (2283)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/immich.svg
+      }
+      redis: "redis" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/redis.svg
+      }
+    }
+
+    nextcloud: "nextcloud" {
+      class: stack
+      grid-columns: 1
+      app: "app (8085)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/nextcloud.svg
+      }
+      db: "db"
+      db.class: service
+    }
+
+    paperless_ngx: "paperless-ngx" {
+      class: stack
+      grid-columns: 2
+      broker: "broker" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/redis.svg
+      }
+      db: "db"
+      db.class: service
+      webserver: "webserver (8000)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/paperless-ngx.svg
+      }
+    }
+
+    photoprism: "photoprism" {
+      class: stack
+      grid-columns: 1
+      mariadb: "mariadb"
+      mariadb.class: service
+      photoprism: "photoprism (2342)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/photoprism.svg
+      }
+    }
+
+  }
+
+  finance: "Finance" {
+    class: category
+    grid-columns: 2
+
+    actual_budget: "actual-budget" {
+      class: stack
+      grid-columns: 1
+      actual_server: "actual_server (5006)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/actual-budget.svg
+      }
+    }
+
+    firefly_iii: "firefly-iii" {
+      class: stack
+      grid-columns: 2
+      app: "app (83)"
+      app.class: service
+      cron: "cron"
+      cron.class: service
+      db: "db"
+      db.class: service
+    }
+
+  }
+
+  home_automation: "Home Automation" {
+    class: category
+    grid-columns: 2
+
+    home_assistant: "home-assistant" {
+      class: stack
+      grid-columns: 1
+      homeassistant: "homeassistant" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/home-assistant.svg
+      }
+    }
+
+  }
+
+  identity_sso: "Identity / SSO" {
+    class: category
+    grid-columns: 2
+
+    authentik: "authentik" {
+      class: stack
+      grid-columns: 2
+      postgresql: "postgresql"
+      postgresql.class: service
+      redis: "redis" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/redis.svg
+      }
+      server: "server (9000, 9443)"
+      server.class: service
+      worker: "worker"
+      worker.class: service
+    }
+
+  }
+
+  media: "Media" {
+    class: category
+    grid-columns: 2
+
+    media_server: "media-server" {
+      class: stack
+      grid-columns: 2
+      bazarr: "bazarr (6767)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/bazarr.svg
+      }
+      flaresolverr: "flaresolverr (8191)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/flaresolverr.svg
+      }
+      jellyfin: "jellyfin (8096)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/jellyfin.svg
+      }
+      lidarr: "lidarr (8686)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/lidarr.svg
+      }
+      pinchflat: "pinchflat (8945)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${dipng}/pinchflat.png
+      }
+      prowlarr: "prowlarr (9696)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/prowlarr.svg
+      }
+      qbittorrent: "qbittorrent (6881, 8087)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/qbittorrent.svg
+      }
+      radarr: "radarr (7878)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/radarr.svg
+      }
+      readarr: "readarr (8787)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/readarr.svg
+      }
+      seerr: "seerr (5055)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/overseerr.svg
+      }
+      sonarr: "sonarr (8989)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/sonarr.svg
+      }
+    }
+
+  }
+
+  media_downloaders: "Media Downloaders" {
+    class: category
+    grid-columns: 2
+
+    bazarr: "bazarr" {
+      class: stack
+      grid-columns: 1
+      bazarr: "bazarr (6767)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/bazarr.svg
+      }
+    }
+
+    deemix: "deemix" {
+      class: stack
+      grid-columns: 1
+      deemix: "deemix (6595)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/deemix.svg
+      }
+    }
+
+    lidarr_on_steroids: "lidarr-on-steroids" {
+      class: stack
+      grid-columns: 1
+      lidarr_onsteroids: "lidarr-onsteroids (6596, 8687)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/lidarr.svg
+      }
+    }
+
+    overseerr: "overseerr" {
+      class: stack
+      grid-columns: 1
+      overseerr: "overseerr (5055)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/overseerr.svg
+      }
+    }
+
+    prowlarr: "prowlarr" {
+      class: stack
+      grid-columns: 1
+      prowlarr: "prowlarr (9696)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/prowlarr.svg
+      }
+    }
+
+    radarr: "radarr" {
+      class: stack
+      grid-columns: 1
+      radarr: "radarr (7878)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/radarr.svg
+      }
+    }
+
+    sonarr: "sonarr" {
+      class: stack
+      grid-columns: 1
+      sonarr: "sonarr (8989)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/sonarr.svg
+      }
+    }
+
+    transmission_openvpn: "transmission-openvpn" {
+      class: stack
+      grid-columns: 1
+      transmission: "transmission (9091)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/transmission.svg
+      }
+    }
+
+  }
+
+  media_streaming: "Media Streaming" {
+    class: category
+    grid-columns: 2
+
+    audiobookshelf: "audiobookshelf" {
+      class: stack
+      grid-columns: 1
+      audiobookshelf: "audiobookshelf (13378)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/audiobookshelf.svg
+      }
+    }
+
+    jellyfin: "jellyfin" {
+      class: stack
+      grid-columns: 1
+      jellyfin: "jellyfin" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/jellyfin.svg
+      }
+    }
+
+    navidrome: "navidrome" {
+      class: stack
+      grid-columns: 1
+      navidrome: "navidrome (4533)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/navidrome.svg
+      }
+    }
+
+    plexmediaserver: "plexmediaserver" {
+      class: stack
+      grid-columns: 1
+      plex: "plex" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/plex.svg
+      }
+    }
+
+    stash: "stash" {
+      class: stack
+      grid-columns: 1
+      stash: "stash (9999)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/stash.svg
+      }
+    }
+
+    tubearchivist: "tubearchivist" {
+      class: stack
+      grid-columns: 2
+      archivist_es: "archivist-es" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/tubearchivist.svg
+      }
+      archivist_redis: "archivist-redis" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/redis.svg
+      }
+      tubearchivist: "tubearchivist (8002)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/tubearchivist.svg
+      }
+    }
+
+  }
+
+  networking: "Networking" {
+    class: category
+    grid-columns: 2
+
+    adguard_home: "adguard-home" {
+      class: stack
+      grid-columns: 1
+      adguardhome: "adguardhome (3000, 53, 80)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/adguard-home.svg
+      }
+    }
+
+    cloudflare_tunnel: "cloudflare-tunnel" {
+      class: stack
+      grid-columns: 1
+      cloudflare_tunnel: "cloudflare-tunnel" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/cloudflare.svg
+      }
+    }
+
+    pihole: "pihole" {
+      class: stack
+      grid-columns: 1
+      pihole: "pihole (54, 55, 84)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/pi-hole.svg
+      }
+    }
+
+    traefik: "traefik" {
+      class: stack
+      grid-columns: 1
+      traefik: "traefik (443, 8092, 86)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/traefik.svg
+      }
+    }
+
+  }
+
+  notes: "Notes" {
+    class: category
+    grid-columns: 2
+
+    linkding: "linkding" {
+      class: stack
+      grid-columns: 1
+      linkding: "linkding (9099)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/linkding.svg
+      }
+    }
+
+    memos: "memos" {
+      class: stack
+      grid-columns: 1
+      memos: "memos (5230)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/memos.svg
+      }
+    }
+
+  }
+
+  notifications: "Notifications" {
+    class: category
+    grid-columns: 2
+
+    ntfy: "ntfy" {
+      class: stack
+      grid-columns: 1
+      ntfy: "ntfy (8087)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/ntfy.svg
+      }
+    }
+
+  }
+
+  other_services: "Other Services" {
+    class: category
+    grid-columns: 2
+
+    lidarr: "lidarr" {
+      class: stack
+      grid-columns: 1
+      lidarr: "lidarr (8686)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/lidarr.svg
+      }
+    }
+
+  }
+
+  passive_income_bandwidth_sharing: "Passive Income / Bandwidth Sharing" {
+    class: category
+    grid-columns: 2
+
+    earnapp: "earnapp" {
+      class: stack
+      grid-columns: 1
+      app: "app" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/earnapp.svg
+      }
+    }
+
+    honeygain: "honeygain" {
+      class: stack
+      grid-columns: 1
+      honeygain: "honeygain" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/honeygain.svg
+      }
+    }
+
+    pawnscli: "pawnscli" {
+      class: stack
+      grid-columns: 1
+      honeygain: "honeygain" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/honeygain.svg
+      }
+    }
+
+  }
+
+  password_management: "Password Management" {
+    class: category
+    grid-columns: 2
+
+    vaultwarden: "vaultwarden" {
+      class: stack
+      grid-columns: 1
+      vaultwarden: "vaultwarden (8093)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/vaultwarden.svg
+      }
+    }
+
+  }
+
+  rss: "RSS" {
+    class: category
+    grid-columns: 2
+
+    freshrss: "freshrss" {
+      class: stack
+      grid-columns: 1
+      freshrss: "freshrss (8080)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/freshrss.svg
+      }
+    }
+
+  }
+
+  recipes: "Recipes" {
+    class: category
+    grid-columns: 2
+
+    mealie: "mealie" {
+      class: stack
+      grid-columns: 1
+      mealie: "mealie (9925)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/mealie.svg
+      }
+    }
+
+    tandoor: "tandoor" {
+      class: stack
+      grid-columns: 1
+      db_recipes: "db_recipes"
+      db_recipes.class: service
+      web_recipes: "web_recipes (85)"
+      web_recipes.class: service
+    }
+
+  }
+
+  server_monitoring: "Server Monitoring" {
+    class: category
+    grid-columns: 2
+
+    beszel: "beszel" {
+      class: stack
+      grid-columns: 1
+      beszel: "beszel (8095)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/beszel.svg
+      }
+      beszel_agent: "beszel-agent" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/beszel.svg
+      }
+    }
+
+    cadvisor: "cadvisor" {
+      class: stack
+      grid-columns: 1
+      cadvisor: "cadvisor (8082)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/cadvisor.svg
+      }
+    }
+
+    grafana: "grafana" {
+      class: stack
+      grid-columns: 1
+      grafana: "grafana (3001)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/grafana.svg
+      }
+    }
+
+    node_exporter: "node-exporter" {
+      class: stack
+      grid-columns: 1
+      node_exporter: "node_exporter" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/prometheus.svg
+      }
+    }
+
+    prometheus: "prometheus" {
+      class: stack
+      grid-columns: 2
+      alertmanager: "alertmanager (9093)"
+      alertmanager.class: service
+      cadvisor: "cadvisor (8088)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/cadvisor.svg
+      }
+      grafana: "grafana (3005)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/grafana.svg
+      }
+      node_exporter: "node-exporter (9100)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/prometheus.svg
+      }
+      prometheus: "prometheus (9090)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/prometheus.svg
+      }
+    }
+
+    scrutiny: "scrutiny" {
+      class: stack
+      grid-columns: 1
+      scrutiny: "scrutiny (8081, 8086)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/scrutiny.svg
+      }
+    }
+
+    speedtest_tracker: "speedtest-tracker" {
+      class: stack
+      grid-columns: 1
+      speedtest_tracker: "speedtest-tracker (8090, 8443)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/speedtest-tracker.svg
+      }
+    }
+
+    uptime_kuma: "uptime-kuma" {
+      class: stack
+      grid-columns: 1
+      uptime_kuma: "uptime-kuma (3006)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/uptime-kuma.svg
+      }
+    }
+
+  }
+
+  tools: "Tools" {
+    class: category
+    grid-columns: 2
+
+    changedetection_io: "changedetection.io" {
+      class: stack
+      grid-columns: 1
+      changedetection: "changedetection (5000)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/changedetection.svg
+      }
+    }
+
+    epicgames_freegames: "epicgames-freegames" {
+      class: stack
+      grid-columns: 1
+      epicgames_freegames: "epicgames-freegames (4206)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/epicgames-freegames.svg
+      }
+    }
+
+    filebrowser: "filebrowser" {
+      class: stack
+      grid-columns: 1
+      filebrowser: "filebrowser (8079)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/filebrowser.svg
+      }
+    }
+
+    fileflows: "fileflows" {
+      class: stack
+      grid-columns: 1
+      fileflows: "fileflows (5002)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/fileflows.svg
+      }
+    }
+
+    it_tools: "it-tools" {
+      class: stack
+      grid-columns: 1
+      it_tools: "it-tools (8084)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/it-tools.svg
+      }
+    }
+
+    kiwix: "kiwix" {
+      class: stack
+      grid-columns: 1
+      kiwix_serve: "kiwix-serve (8097)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/kiwix.svg
+      }
+    }
+
+    pyload: "pyload" {
+      class: stack
+      grid-columns: 1
+      pyload_ng: "pyload-ng (8001, 9666)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/pyload.svg
+      }
+    }
+
+    searxng: "searxng" {
+      class: stack
+      grid-columns: 1
+      searxng: "searxng (8089)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/searxng.svg
+      }
+    }
+
+    stirling_pdf: "stirling-pdf" {
+      class: stack
+      grid-columns: 1
+      stirling_pdf: "stirling-pdf (8091)" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/stirling-pdf.svg
+      }
+    }
+
+    upsnap: "upsnap" {
+      class: stack
+      grid-columns: 1
+      upsnap: "upsnap" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/upsnap.svg
+      }
+    }
+
+  }
+
+}
+
+# Network / Dependency Connections
+fleet.networking.traefik -> fleet.dashboard.homepage: "Reverse Proxy"
+fleet.server_monitoring.prometheus -> fleet.server_monitoring.grafana: "Scrapes Metrics"
+fleet.media_downloaders.sonarr -> fleet.media_downloaders.transmission_openvpn: "Downloads Torrent"
+fleet.media_downloaders.radarr -> fleet.media_downloaders.transmission_openvpn: "Downloads Torrent"

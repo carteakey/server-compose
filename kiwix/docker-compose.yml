@@ -1,0 +1,11 @@
+services:
+  kiwix-serve:
+    image: ghcr.io/kiwix/kiwix-serve:latest
+    container_name: kiwix-serve
+    volumes:
+      - ./data:/data
+    ports:
+      - 8097:8080
+    # Replace example.zim with your downloaded ZIM files (e.g., wikipedia_en_all_maxi.zim)
+    command: "example.zim"
+    restart: unless-stopped

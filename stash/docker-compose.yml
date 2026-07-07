@@ -1,0 +1,19 @@
+services:
+  stash:
+    image: stashapp/stash:latest
+    container_name: stash
+    restart: unless-stopped
+    ports:
+      - "9999:9999"
+    environment:
+      - STASH_STASH=/data/
+      - STASH_GENERATED=/generated/
+      - STASH_METADATA=/metadata/
+      - STASH_CACHE=/cache/
+      - STASH_PORT=9999
+    volumes:
+      - ./config:/root/.stash
+      - ./data:/data
+      - ./metadata:/metadata
+      - ./cache:/cache
+      - ./generated:/generated

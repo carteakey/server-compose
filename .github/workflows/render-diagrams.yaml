@@ -1,0 +1,68 @@
+name: Render Architecture Diagrams
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**/docker-compose.y*ml"
+      - "**/compose.y*ml"
+      - "diagram-config.yaml"
+      - "scripts/generate-diagram.py"
+  workflow_dispatch:
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: pip install PyYAML
+
+      - name: Generate D2 markup
+        run: |
+          python3 scripts/generate-diagram.py --config diagram-config.yaml
+          python3 scripts/generate-diagram.py --config diagram-config.yaml --anonymize
+
+      - name: Render D2 to SVG
+        run: |
+          for f in docs/diagrams/*.d2; do
+            name=$(basename "$f" .d2)
+            docker run --rm -v "${PWD}/docs/diagrams:/work" \
+              terrastruct/d2:v0.7.1 \
+              --layout elk \
+              --elk-nodeNodeBetweenLayers=70 \
+              --elk-padding="[top=50,left=50,bottom=50,right=50]" \
+              --pad 80 "/work/$name.d2" "/work/$name.svg"
+          done
+          sudo chown -R "$(id -u):$(id -g)" docs/diagrams
+
+      - name: Rasterize SVG to PNG
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y librsvg2-bin
+          for f in docs/diagrams/*.svg; do
+            name=$(basename "$f" .svg)
+            rsvg-convert --keep-aspect-ratio --width 3840 --height 2160 "$f" -o "docs/diagrams/$name.png"
+          done
+
+      - name: Commit and Push Diagrams
+        run: |
+          if [ -n "$(git status --porcelain docs/diagrams)" ]; then
+            git config --global user.name "GitHub Actions"
+            git config --global user.email "actions@github.com"
+            git add docs/diagrams
+            git commit -m "chore(diagram): regenerate architecture diagrams [skip ci]"
+            git push origin HEAD:main
+          else
+            echo "Diagrams already up to date."
+          fi

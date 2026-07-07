@@ -1,0 +1,22 @@
+services:
+  beszel:
+    image: henrygd/beszel:latest
+    container_name: beszel
+    restart: unless-stopped
+    ports:
+      - "8095:8090"
+    volumes:
+      - ./beszel_data:/beszel_data
+
+  beszel-agent:
+    image: henrygd/beszel-agent:latest
+    container_name: beszel-agent
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      # Monitor other disks by mounting them under /extra-filesystems
+      # - /mnt/disk:/extra-filesystems/disk:ro
+    environment:
+      PORT: 45876
+      KEY: "YOUR_SSH_PUBLIC_KEY_FROM_BESZEL_DASHBOARD"

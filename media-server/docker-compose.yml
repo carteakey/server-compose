@@ -1,0 +1,185 @@
+# =============================================================================
+# Combined Media Server Compose File
+# =============================================================================
+# A fully integrated media stack containing streaming servers, downloaders,
+# indexer managers, subtitles, and request platforms.
+#
+# Services included:
+#   - Jellyfin: Media server
+#   - Sonarr & Radarr & Lidarr & Readarr: Media coordinators
+#   - Prowlarr: Indexer proxy
+#   - qBittorrent: Torrent client
+#   - Bazarr: Subtitles manager
+#   - Seerr (Overseerr fork): Media request hub
+#   - FlareSolverr: Cloudflare bypass proxy for indexers
+#   - Pinchflat: YouTube media archiver
+# =============================================================================
+
+services:
+  jellyfin:
+    image: ghcr.io/hotio/jellyfin:latest
+    container_name: jellyfin
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ:-UTC}
+      - UMASK=022
+    volumes:
+      - ./config/jellyfin:/config
+      - ./media/movies:/data/movies
+      - ./media/tv:/data/tv
+      - ./media/music:/data/music
+      - ./media/books:/data/books
+      - ./transcode:/transcode
+    ports:
+      - "8096:8096"
+    restart: unless-stopped
+
+  sonarr:
+    image: ghcr.io/hotio/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ:-UTC}
+      - UMASK=022
+    volumes:
+      - ./config/sonarr:/config
+      - ./media/tv:/data/tv
+      - ./media/downloads:/data/downloads
+    ports:
+      - "8989:8989"
+    restart: unless-stopped
+
+  radarr:
+    image: ghcr.io/hotio/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ:-UTC}
+      - UMASK=022
+    volumes:
+      - ./config/radarr:/config
+      - ./media/movies:/data/movies
+      - ./media/downloads:/data/downloads
+    ports:
+      - "7878:7878"
+    restart: unless-stopped
+
+  lidarr:
+    image: ghcr.io/hotio/lidarr:latest
+    container_name: lidarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ:-UTC}
+      - UMASK=022
+    volumes:
+      - ./config/lidarr:/config
+      - ./media/music:/data/music
+      - ./media/downloads:/data/downloads
+    ports:
+      - "8686:8686"
+    restart: unless-stopped
+
+  readarr:
+    image: ghcr.io/hotio/readarr:latest
+    container_name: readarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ:-UTC}
+      - UMASK=022
+    volumes:
+      - ./config/readarr:/config
+      - ./media/books:/data/books
+      - ./media/downloads:/data/downloads
+    ports:
+      - "8787:8787"
+    restart: unless-stopped
+
+  prowlarr:
+    image: ghcr.io/hotio/prowlarr:latest
+    container_name: prowlarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ:-UTC}
+      - UMASK=022
+    volumes:
+      - ./config/prowlarr:/config
+    ports:
+      - "9696:9696"
+    restart: unless-stopped
+
+  qbittorrent:
+    image: ghcr.io/hotio/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ:-UTC}
+      - UMASK=022
+      - WEBUI_PORT=8080
+    volumes:
+      - ./config/qbittorrent:/config
+      - ./media/downloads:/data/downloads
+    ports:
+      - "8087:8080"
+      - "6881:6881"
+      - "6881:6881/udp"
+    restart: unless-stopped
+
+  bazarr:
+    image: ghcr.io/hotio/bazarr:latest
+    container_name: bazarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ:-UTC}
+      - UMASK=022
+    volumes:
+      - ./config/bazarr:/config
+      - ./media/tv:/data/tv
+      - ./media/movies:/data/movies
+    ports:
+      - "6767:6767"
+    restart: unless-stopped
+
+  seerr:
+    image: ghcr.io/seerr-team/seerr:latest
+    init: true
+    container_name: seerr
+    environment:
+      - TZ=${TZ:-UTC}
+      - PORT=5055
+    ports:
+      - "5055:5055"
+    volumes:
+      - ./config/seerr:/app/config
+    restart: unless-stopped
+
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    environment:
+      - TZ=${TZ:-UTC}
+      - LOG_LEVEL=info
+    ports:
+      - "8191:8191"
+    restart: unless-stopped
+
+  pinchflat:
+    image: ghcr.io/kieraneglin/pinchflat:latest
+    container_name: pinchflat
+    environment:
+      - TZ=${TZ:-UTC}
+      - LOG_LEVEL=info
+      - YT_DLP_WORKER_CONCURRENCY=1
+    volumes:
+      - ./config/pinchflat:/config
+      - ./media/youtube:/downloads
+    ports:
+      - "8945:8945"
+    restart: unless-stopped

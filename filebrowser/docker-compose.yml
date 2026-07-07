@@ -1,0 +1,11 @@
+services:
+  filebrowser:
+    image: filebrowser/filebrowser:latest
+    container_name: filebrowser
+    restart: unless-stopped
+    ports:
+      - "8079:80"
+    volumes:
+      - ./shared-files:/srv
+      - ./filebrowser.db:/database.db
+      - ./settings.json:/config/settings.json

@@ -1,0 +1,10 @@
+services:
+  upsnap:
+    container_name: upsnap
+    image: ghcr.io/seriousm4x/upsnap:4
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - ./data:/app/pb_data
+    # Required for ping/wakeonlan utilities inside the container
+    entrypoint: /bin/sh -c "./upsnap serve --http 0.0.0.0:5000"

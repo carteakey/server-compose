@@ -139,6 +139,30 @@ services:
     path: docker-compose.yaml
     compose_file: docker-compose.yml
 
+  linkding:
+    source_type: github_raw
+    repo: sissbruecker/linkding
+    branch: master
+    path: docker-compose.yml
+
+  photoprism:
+    source_type: github_raw
+    repo: photoprism/photoprism
+    branch: main
+    path: docker-compose.yml
+
+  firecrawl:
+    source_type: github_raw
+    repo: mendableai/firecrawl
+    branch: main
+    path: docker-compose.yaml
+
+  windmill:
+    source_type: github_raw
+    repo: windmill-labs/windmill
+    branch: main
+    path: docker-compose.yml
+
   # ─────────────────────────────────────────────────────────────────────────
   # The following services do NOT publish standalone docker-compose.yml files
   # in their upstream repos. They are managed via linuxserver.io images or
@@ -148,7 +172,9 @@ services:
   #   grafana, portainer, home-assistant, fileflows,
   #   uptime-kuma, vaultwarden, stirling-pdf, it-tools,
   #   ollama, speedtest-tracker, gitea, traefik,
-  #   adguard-home, authentik, mealie, calibre-web, n8n
+  #   adguard-home, authentik, mealie, calibre-web, n8n,
+  #   beszel, cloudflare-tunnel, upsnap, kiwix, kavita,
+  #   stash, filebrowser, media-server
   #
   # To track these, you can add a community source or your own fork URL.
   # ─────────────────────────────────────────────────────────────────────────

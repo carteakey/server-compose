@@ -2,6 +2,10 @@
 
 A collection of sample [docker compose](https://docs.docker.com/compose/) files and configurations of popular [self hosted](https://www.reddit.com/r/selfhosted/) for quick reference! Sensible configurations, ports, and folder structures used wherever possible.
 
+## Stack Architecture
+
+![Architecture Overview](docs/diagrams/architecture-overview.svg)
+
 # How to Use
 
 - Install [Docker](https://docs.docker.com/get-docker/).
@@ -39,12 +43,15 @@ Alternatively, use the excellent [Dockge](#dockge) to manage your stacks.
 | **Networking**     | [Traefik](https://traefik.io/traefik/)       | Cloud-native reverse proxy with automatic HTTPS and Docker integration. | [GitHub](https://github.com/traefik/traefik) | [Compose](traefik) |
 |                    | [AdGuard Home](https://adguard.com/adguard-home.html) | Network-wide DNS ad blocker and privacy protection. | [GitHub](https://github.com/AdguardTeam/AdGuardHome) | [Compose](adguard-home) |
 |                    | [Pi-hole](https://pi-hole.net/)              | Network-wide DNS ad blocker (alternative to AdGuard Home). | [GitHub](https://github.com/pi-hole/pi-hole) | [Compose](pihole) |
+|                    | [Cloudflare Tunnel](https://www.cloudflare.com/products/tunnel/) | Expose local services securely to the Cloudflare network without opening router ports. | [GitHub](https://github.com/cloudflare/cloudflared) | [Compose](cloudflare-tunnel) |
 | **Identity / SSO** | [Authentik](https://goauthentik.io/)         | Identity provider with SSO, LDAP, SAML, and OIDC support. | [GitHub](https://github.com/goauthentik/authentik) | [Compose](authentik) |
 | **Media Streaming**| [Plex Media Server](https://www.plex.tv/)    | Centralized home media playback system with a powerful central server. | | [Compose](plexmediaserver) |
 |                    | [Jellyfin](https://jellyfin.org)             | Jellyfin is an alternative to the proprietary Emby and Plex, to provide media from a server to end-user devices via multiple apps. | [GitHub](https://github.com/jellyfin/jellyfin) | [Compose](jellyfin) |
 |                    | [Navidrome Music Server](https://www.navidrome.org) | Modern Music Server and Streamer, compatible with Subsonic/Airsonic. | [GitHub](https://github.com/navidrome/navidrome) | [Compose](navidrome) |
 |                    | [TubeArchivist](https://www.tubearchivist.com/) | Your self hosted YouTube media server. | [GitHub](https://github.com/tubearchivist/tubearchivist) | [Compose](tubearchivist) |
 |                    | [Audiobookshelf](https://www.audiobookshelf.org/) | Self-hosted audiobook and podcast server. | [GitHub](https://github.com/advplyr/audiobookshelf) | [Compose](audiobookshelf) |
+|                    | [Stash](https://stashapp.github.io/)        | An organizer and tagger for local media collections. | [GitHub](https://github.com/stashapp/stash) | [Compose](stash) |
+|                    | Combined Media Server                       | Combined media server compose file containing Jellyfin, Sonarr, Radarr, Lidarr, Prowlarr, qBittorrent, Bazarr, Seerr, Readarr, FlareSolverr, and Pinchflat. | | [Compose](media-server) |
 | **Media Downloaders** | [Transmission-OpenVPN](https://haugene.github.io/docker-transmission-openvpn/) | Run Transmission (Torrent Downloader) only when OpenVPN has an active tunnel. All _arr_ applications will use it to download media. | [GitHub](https://github.com/haugene/docker-transmission-openvpn) | [Compose](transmission-openvpn) |
 |                    | [Radarr](https://radarr.video/)              | Radarr is an independent fork of Sonarr reworked for automatically downloading movies via Usenet and BitTorrent, à la Couchpotato. | [GitHub](https://github.com/Radarr/Radarr) | [Compose](radarr) |
 |                    | [Sonarr](https://sonarr.tv/)                 | Automatic TV Shows downloader and manager for Usenet and BitTorrent. | [GitHub](https://github.com/Sonarr/Sonarr) | [Compose](sonarr) |
@@ -56,6 +63,7 @@ Alternatively, use the excellent [Dockge](#dockge) to manage your stacks.
 | **File Sharing & Backup**| [Immich](https://immich.app/) | High performance self-hosted photo and video backup solution. | [GitHub](https://github.com/immich-app/immich) | [Compose](immich) |
 |                    | [Nextcloud](https://nextcloud.com/install/#instructions-server) | A safe home for all your data. Access & share your files, calendars, contacts, mail & more from any device, on your terms. | [GitHub](https://github.com/nextcloud/server) | [Compose](nextcloud) |
 |                    | [Paperless-ngx](https://docs.paperless-ngx.com) | Paperless-ngx is a document management system that transforms your physical documents into a searchable online archive so you can keep, well, less paper. | [GitHub](https://github.com/paperless-ngx/paperless-ngx) | [Compose](paperless-ngx) |
+|                    | [PhotoPrism](https://photoprism.app/)       | AI-powered photo management and backup app with face/scene recognition. | [GitHub](https://github.com/photoprism/photoprism) | [Compose](photoprism) |
 | **Password Management** | [Vaultwarden](https://github.com/dani-garcia/vaultwarden) | Lightweight Bitwarden-compatible password manager server. | [GitHub](https://github.com/dani-garcia/vaultwarden) | [Compose](vaultwarden) |
 | **Container Management**|[Portainer](https://www.portainer.io)        | Lightweight management UI for Docker containers. | [GitHub](https://github.com/portainer/portainer) | [Compose](portainer) |
 |                    | [WatchTower](https://containrrr.dev/watchtower/) | Automates Docker container base image updates. | [GitHub](https://github.com/containrrr/watchtower) | [Compose](watchtower) |
@@ -67,21 +75,29 @@ Alternatively, use the excellent [Dockge](#dockge) to manage your stacks.
 |                    | [Stirling PDF](https://stirlingpdf.io/)      | Self-hosted PDF manipulation tool (merge, split, convert, OCR). | [GitHub](https://github.com/Stirling-Tools/Stirling-PDF) | [Compose](stirling-pdf) |
 |                    | [IT Tools](https://it-tools.tech/)           | Collection of handy developer utilities (hash generators, encoders, etc). | [GitHub](https://github.com/CorentinTh/it-tools) | [Compose](it-tools) |
 |                    | [SearXNG](https://docs.searxng.org/)         | Privacy-respecting meta search engine aggregating 70+ sources. | [GitHub](https://github.com/searxng/searxng) | [Compose](searxng) |
+|                    | [UpSnap](https://github.com/seriousm4x/upsnap) | Wake-on-LAN dashboard to wake up network devices on demand. | [GitHub](https://github.com/seriousm4x/upsnap) | [Compose](upsnap) |
+|                    | [Kiwix](https://www.kiwix.org/)              | Offline reader for Wikipedia, StackExchange, and other online wikis. | [GitHub](https://github.com/kiwix/kiwix-tools) | [Compose](kiwix) |
+|                    | [Filebrowser](https://filebrowser.org/)     | Web-based file manager to browse, upload, download, and share files. | [GitHub](https://github.com/filebrowser/filebrowser) | [Compose](filebrowser) |
 | **Finance**        | [Firefly III](https://www.firefly-iii.org) | "Firefly III" is a (self-hosted) manager for your personal finances. | [GitHub](https://github.com/firefly-iii/firefly-iii/) | [Compose](firefly-iii) |
 |                    | [Actual Budget](https://actualbudget.org)                 | Actual Budget is a super fast and privacy-focused app for managing your finances. | [GitHub](https://github.com/actualbudget/actual) | [Compose](actual-budget) |
-| **Server Monitoring**     | [cAdvisor](https://github.com/google/cadvisor) | Analyzes resource usage and performance of running docker containers. | [GitHub](https://github.com/google/cadvisor) | [Compose](cadvisor) |
+| **Server Monitoring**     | [cAdvisor](https://github.com/google/cadvisor) | Automatically monitors container metrics. | [GitHub](https://github.com/google/cadvisor) | [Compose](cadvisor) |
 |                    | [Prometheus](https://prometheus.io/)         | Open-source monitoring system. | [GitHub](https://github.com/prometheus/prometheus) | [Compose](prometheus) |
 |                    | [node-exporter](https://github.com/prometheus/node_exporter) | Exposes hardware- and kernel-related metrics. | [GitHub](https://github.com/prometheus/node_exporter) | [Compose](node-exporter) |
 |                    | [Grafana](https://grafana.com/)              | Multi-platform open source analytics and interactive visualization web application. | [GitHub](https://github.com/grafana/grafana) | [Compose](grafana) |
 |                    | [Scrutiny](https://github.com/AnalogJ/scrutiny) | WebUI for smartd S.M.A.R.T monitoring. | [GitHub](https://github.com/AnalogJ/scrutiny) | [Compose](scrutiny) |
 |                    | [Uptime Kuma](https://uptime.kuma.pet/)      | Lightweight and fancy self-hosted monitoring tool. | [GitHub](https://github.com/louislam/uptime-kuma) | [Compose](uptime-kuma) |
 |                    | [Speedtest Tracker](https://docs.speedtest-tracker.dev/) | Automated internet speed test scheduling with historical graphs. | [GitHub](https://github.com/alexjustesen/speedtest-tracker) | [Compose](speedtest-tracker) |
+|                    | [Beszel](https://beszel.dev/)               | Lightweight self-hosted server monitoring hub and agent with historical graphs. | [GitHub](https://github.com/warrenchen/beszel) | [Compose](beszel) |
 | **AI / LLM**       | [Ollama + Open WebUI](https://ollama.com/)   | Local LLM inference with a ChatGPT-style web interface. | [GitHub](https://github.com/ollama/ollama) | [Compose](ollama) |
+|                    | [Firecrawl](https://www.firecrawl.dev/)     | API service that crawls any URL and converts it to LLM-friendly Markdown. | [GitHub](https://github.com/mendableai/firecrawl) | [Compose](firecrawl) |
 | **Dev Tools**      | [Gitea](https://about.gitea.com/)            | Lightweight self-hosted Git service (GitHub/GitLab alternative). | [GitHub](https://github.com/go-gitea/gitea) | [Compose](gitea) |
+|                    | [Windmill](https://www.windmill.dev/)       | Developer platform to build multi-step workflows, scripts, and internal tools. | [GitHub](https://github.com/windmill-labs/windmill) | [Compose](windmill) |
 | **Recipes**        | [Tandoor Recipes](https://tandoor.dev/)      | Recipe manager and meal planner for your household. | [GitHub](https://github.com/TandoorRecipes/recipes) | [Compose](tandoor) |
 |                    | [Mealie](https://mealie.io/)                 | Intuitive recipe manager with meal planning and recipe scraping. | [GitHub](https://github.com/mealie-recipes/mealie) | [Compose](mealie) |
 | **Books**          | [Calibre-Web](https://github.com/janeczku/calibre-web) | Web-based ebook management and reader powered by Calibre. | [GitHub](https://github.com/janeczku/calibre-web) | [Compose](calibre-web) |
+|                    | [Kavita](https://www.kavitareader.com/)     | Comic, manga, and book library server with a clean responsive UI. | [GitHub](https://github.com/Kareadita/Kavita) | [Compose](kavita) |
 | **Notes**          | [Memos](https://usememos.com/)               | Lightweight, privacy-first note-taking and micro-journaling server with a clean UI. | [GitHub](https://github.com/usememos/memos) | [Compose](memos) |
+|                    | [Linkding](https://github.com/sissbruecker/linkding) | Minimalist, fast, self-hosted bookmark manager written in Python. | [GitHub](https://github.com/sissbruecker/linkding) | [Compose](linkding) |
 | **RSS**            | [FreshRSS](https://freshrss.org/)            | Self-hosted RSS feed aggregator, lightweight and customizable. | [GitHub](https://github.com/FreshRSS/FreshRSS) | [Compose](freshrss) |
 | **Notifications**  | [ntfy](https://ntfy.sh/)                     | Simple push notification service with HTTP API (UnifiedPush). | [GitHub](https://github.com/binwiederhier/ntfy) | [Compose](ntfy) |
 | **Automation**     | [n8n](https://n8n.io/)                       | Workflow automation tool (Zapier/Make alternative) with 400+ integrations. | [GitHub](https://github.com/n8n-io/n8n) | [Compose](n8n) |
