@@ -1205,7 +1205,5 @@ fleet: "Services registry" {
 }
 
 # Network / Dependency Connections
-fleet.networking.traefik -> fleet.dashboard.homepage: "Reverse Proxy"
-fleet.server_monitoring.prometheus -> fleet.server_monitoring.grafana: "Scrapes Metrics"
-fleet.media_downloaders.sonarr -> fleet.media_downloaders.transmission_openvpn: "Downloads Torrent"
-fleet.media_downloaders.radarr -> fleet.media_downloaders.transmission_openvpn: "Downloads Torrent"
+fleet.media_downloaders.sonarr.sonarr -> fleet.media.media_server.qbittorrent: "Downloads Torrent"
+fleet.media_downloaders.radarr.radarr -> fleet.media.media_server.qbittorrent: "Downloads Torrent"
