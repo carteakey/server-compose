@@ -15,6 +15,7 @@ ignored_directories:
   - "_scripts"
   - "docs"
   - "scratch"
+  - "archive"
   - "sonarr"
   - "radarr"
   - "lidarr"

@@ -29,11 +29,6 @@ services:
 
   # ── Media Downloaders ───────────────────────────────────────────────────
 
-  overseerr:
-    source_type: github_raw
-    repo: sct/overseerr
-    branch: develop
-    path: docker-compose.yml
 
   lidarr-on-steroids:
     source_type: github_raw
