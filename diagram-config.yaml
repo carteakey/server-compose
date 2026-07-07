@@ -37,12 +37,6 @@ service_icons:
 # Connections to draw between services (optional)
 # Uses the folder names of the compose stacks.
 connections:
-  - from: "traefik"
-    to: "homepage"
-    label: "Reverse Proxy"
-  - from: "prometheus"
-    to: "grafana"
-    label: "Scrapes Metrics"
   - from: "sonarr"
     to: "qbittorrent"
     label: "Downloads Torrent"
