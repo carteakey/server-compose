@@ -534,18 +534,6 @@ fleet: "Services registry" {
     class: category
     grid-columns: 2
 
-    bazarr: "bazarr" {
-      class: stack
-      grid-columns: 1
-      bazarr: "bazarr (6767)" {
-        class: icon
-        shape: image
-        width: 144
-        height: 144
-        icon: ${di}/bazarr.svg
-      }
-    }
-
     deemix: "deemix" {
       class: stack
       grid-columns: 1
@@ -570,66 +558,6 @@ fleet: "Services registry" {
       }
     }
 
-    overseerr: "overseerr" {
-      class: stack
-      grid-columns: 1
-      overseerr: "overseerr (5055)" {
-        class: icon
-        shape: image
-        width: 144
-        height: 144
-        icon: ${di}/overseerr.svg
-      }
-    }
-
-    prowlarr: "prowlarr" {
-      class: stack
-      grid-columns: 1
-      prowlarr: "prowlarr (9696)" {
-        class: icon
-        shape: image
-        width: 144
-        height: 144
-        icon: ${di}/prowlarr.svg
-      }
-    }
-
-    radarr: "radarr" {
-      class: stack
-      grid-columns: 1
-      radarr: "radarr (7878)" {
-        class: icon
-        shape: image
-        width: 144
-        height: 144
-        icon: ${di}/radarr.svg
-      }
-    }
-
-    sonarr: "sonarr" {
-      class: stack
-      grid-columns: 1
-      sonarr: "sonarr (8989)" {
-        class: icon
-        shape: image
-        width: 144
-        height: 144
-        icon: ${di}/sonarr.svg
-      }
-    }
-
-    transmission_openvpn: "transmission-openvpn" {
-      class: stack
-      grid-columns: 1
-      transmission: "transmission (9091)" {
-        class: icon
-        shape: image
-        width: 144
-        height: 144
-        icon: ${di}/transmission.svg
-      }
-    }
-
   }
 
   media_streaming: "Media Streaming" {
@@ -645,18 +573,6 @@ fleet: "Services registry" {
         width: 144
         height: 144
         icon: ${di}/audiobookshelf.svg
-      }
-    }
-
-    jellyfin: "jellyfin" {
-      class: stack
-      grid-columns: 1
-      jellyfin: "jellyfin" {
-        class: icon
-        shape: image
-        width: 144
-        height: 144
-        icon: ${di}/jellyfin.svg
       }
     }
 
@@ -821,24 +737,6 @@ fleet: "Services registry" {
         width: 144
         height: 144
         icon: ${di}/ntfy.svg
-      }
-    }
-
-  }
-
-  other_services: "Other Services" {
-    class: category
-    grid-columns: 2
-
-    lidarr: "lidarr" {
-      class: stack
-      grid-columns: 1
-      lidarr: "lidarr (8686)" {
-        class: icon
-        shape: image
-        width: 144
-        height: 144
-        icon: ${di}/lidarr.svg
       }
     }
 
@@ -1205,5 +1103,5 @@ fleet: "Services registry" {
 }
 
 # Network / Dependency Connections
-fleet.media_downloaders.sonarr.sonarr -> fleet.media.media_server.qbittorrent: "Downloads Torrent"
-fleet.media_downloaders.radarr.radarr -> fleet.media.media_server.qbittorrent: "Downloads Torrent"
+fleet.media.media_server.sonarr -> fleet.media.media_server.qbittorrent: "Downloads Torrent"
+fleet.media.media_server.radarr -> fleet.media.media_server.qbittorrent: "Downloads Torrent"
