@@ -472,6 +472,9 @@ def generate_d2_markup(
         cat = category_mapping.get(s["stack"], "Other Services")
         categorized_stacks.setdefault(cat, []).append(s)
         
+    service_paths: dict[str, str] = {}
+    stack_paths: dict[str, str] = {}
+        
     # Render categories and stacks
     for cat_name, cat_stacks in sorted(categorized_stacks.items()):
         cat_id = d2_id(cat_name)
@@ -482,6 +485,7 @@ def generate_d2_markup(
         
         for stack in sorted(cat_stacks, key=lambda x: x["stack"]):
             stack_id = d2_id(stack["stack"])
+            stack_paths[stack["stack"]] = f"fleet.{cat_id}.{stack_id}"
             lines.append(f"    {stack_id}: {d2_quote(stack['stack'])} {{")
             lines.append("      class: stack")
             
@@ -496,6 +500,7 @@ def generate_d2_markup(
                 if svc_id in used_ids:
                     svc_id = f"{svc_id}_{idx}"
                 used_ids.add(svc_id)
+                service_paths[svc["name"]] = f"fleet.{cat_id}.{stack_id}.{svc_id}"
                 
                 # Construct service label (Name + Ports)
                 ports_label = f" ({', '.join(svc['ports'])})" if svc["ports"] else ""
@@ -537,10 +542,11 @@ def generate_d2_markup(
             to = conn.get("to")
             desc = conn.get("label")
             if frm and to:
-                frm_id = f"fleet.{d2_id(category_mapping.get(frm, 'Other Services'))}.{d2_id(frm)}"
-                to_id = f"fleet.{d2_id(category_mapping.get(to, 'Other Services'))}.{d2_id(to)}"
-                desc_part = f": {d2_quote(desc)}" if desc else ""
-                lines.append(f"{frm_id} -> {to_id}{desc_part}")
+                frm_path = service_paths.get(frm) or stack_paths.get(frm)
+                to_path = service_paths.get(to) or stack_paths.get(to)
+                if frm_path and to_path:
+                    desc_part = f": {d2_quote(desc)}" if desc else ""
+                    lines.append(f"{frm_path} -> {to_path}{desc_part}")
         lines.append("")
         
     return "\n".join(lines)
