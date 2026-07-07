@@ -15,6 +15,13 @@ ignored_directories:
   - "_scripts"
   - "docs"
   - "scratch"
+  - "sonarr"
+  - "radarr"
+  - "lidarr"
+  - "bazarr"
+  - "prowlarr"
+  - "jellyfin"
+  - "transmission-openvpn"
 
 # Custom Category override mapping for folders.
 # If a folder isn't listed here, the script tries to extract the category 
