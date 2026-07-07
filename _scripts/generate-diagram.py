@@ -381,16 +381,18 @@ def discover_services(root_path: Path, ignored_dirs: list[str]) -> list[dict[str
     return services_list
 
 
-def anonymize_label(label: str, anonymize: bool) -> str:
+def anonymize_label(label: str, anonymize: bool, custom_domains: list[str] = None) -> str:
     """Optionally replaces domain names or hostnames for public sharing."""
     if not anonymize:
         return label
-    # Define replacements for common patterns
-    replacements = {
-        "carteakey.dev": "example.com",
-    }
-    for old, new in replacements.items():
-        label = label.replace(old, new)
+    # Default replacements
+    domains = ["carteakey.dev"]
+    if custom_domains:
+        for d in custom_domains:
+            if d not in domains:
+                domains.append(d)
+    for domain in domains:
+        label = label.replace(domain, "example.com")
     return label
 
 
@@ -405,6 +407,7 @@ def generate_d2_markup(
     direction = config.get("direction", "down")
     custom_icons = config.get("service_icons", {})
     connections = config.get("connections", [])
+    custom_domains = config.get("anonymize_domains", [])
     
     lines = [
         f"# Generated D2 Architecture Diagram",
@@ -505,7 +508,7 @@ def generate_d2_markup(
                 # Construct service label (Name + Ports)
                 ports_label = f" ({', '.join(svc['ports'])})" if svc["ports"] else ""
                 label_text = f"{svc['name']}{ports_label}"
-                label = anonymize_label(label_text, anonymize)
+                label = anonymize_label(label_text, anonymize, custom_domains)
                 
                 # Resolve icon
                 icon = get_service_icon(svc["name"], svc["image"], custom_icons)

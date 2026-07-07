@@ -13,7 +13,15 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 README="${SCRIPT_DIR}/README.md"
 OUT="${SCRIPT_DIR}/docs/index.html"
-REPO_URL="https://github.com/carteakey/server-compose"
+if git config --get remote.origin.url &>/dev/null; then
+    REMOTE_URL=$(git config --get remote.origin.url)
+    # Convert git@github.com:owner/repo.git to https://github.com/owner/repo
+    REMOTE_URL=${REMOTE_URL/git@github.com:/https:\/\/github.com\/}
+    # Remove trailing .git
+    REPO_URL=${REMOTE_URL%.git}
+else
+    REPO_URL="https://github.com/carteakey/server-compose"
+fi
 
 # Extract the applications table rows as JSON. Carries the category forward
 # when a row starts with an empty first cell (continuation rows).
