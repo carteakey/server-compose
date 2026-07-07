@@ -105,8 +105,8 @@ done
 # Returns list of service names from services.yaml
 get_service_names() {
     grep -E '^  [a-zA-Z0-9]' "$SERVICES_FILE" \
-        | grep -v '^\s*#' \
-        | sed 's/^\s*//' \
+        | grep -v '^[[:space:]]*#' \
+        | sed 's/^[[:space:]]*//' \
         | sed 's/:.*//' \
         | sort
 }
@@ -127,7 +127,7 @@ get_service_prop() {
         # Detect service block start (exactly 2-space indent + name + colon)
         if [[ "$line" =~ ^[[:space:]]{2}[a-zA-Z0-9] ]] && [[ ! "$line" =~ ^[[:space:]]{4} ]]; then
             local name
-            name=$(echo "$line" | sed 's/^\s*//' | sed 's/:.*//')
+            name=$(echo "$line" | sed 's/^[[:space:]]*//' | sed 's/:.*//')
             if [[ "$name" == "$service" ]]; then
                 in_service=true
                 continue
@@ -147,7 +147,7 @@ get_service_prop() {
             if [[ "$line" =~ ^[[:space:]]+${prop}:[[:space:]]*(.*) ]]; then
                 local value="${BASH_REMATCH[1]}"
                 # Trim trailing whitespace and comments
-                value=$(echo "$value" | sed 's/\s*#.*//' | sed 's/\s*$//')
+                value=$(echo "$value" | sed 's/[[:space:]]*#.*//' | sed 's/[[:space:]]*$//')
                 echo "$value"
                 return 0
             fi
@@ -400,7 +400,10 @@ main() {
         fi
         services=("$TARGET_SERVICE")
     else
-        mapfile -t services < <(get_service_names)
+        services=()
+        while IFS= read -r line; do
+            services+=("$line")
+        done < <(get_service_names)
     fi
 
     local total=${#services[@]}

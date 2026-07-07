@@ -10,7 +10,7 @@ services:
     networks:
       - firefly_iii
     ports:
-      - 83:8080
+      - 80:8080
     depends_on:
       - db
   db:
@@ -27,17 +27,17 @@ services:
     #
     # To make this work, set STATIC_CRON_TOKEN in your .env file or as an environment variable
     # The STATIC_CRON_TOKEN must be *exactly* 32 characters long
+    # Use this URL for inspiration: https://www.random.org/strings/?num=1&len=32&digits=on&upperalpha=on&loweralpha=on&unique=on&format=html&rnd=new
     #
     image: alpine
     restart: always
     container_name: firefly_iii_cron
     env_file: .env
-    command: sh -c "
-      apk add tzdata && \
+    command: ["sh", "-c", "apk add tzdata && \
       (ln -s /usr/share/zoneinfo/$$TZ /etc/localtime || true) && \
-      echo \"0 3 * * * wget -qO- http://app:8080/api/v1/cron/$$STATIC_CRON_TOKEN;echo\"
+      echo \"0 3 * * * wget -qO- http://app:8080/api/v1/cron/$$STATIC_CRON_TOKEN;echo\" \
       | crontab - && \
-      crond -f -L /dev/stdout"
+      crond -f -L /dev/stdout"]
     networks:
       - firefly_iii
     depends_on:

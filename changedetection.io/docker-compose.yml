@@ -28,7 +28,7 @@ services:
   #      - PLAYWRIGHT_DRIVER_URL=ws://browser-sockpuppet-chrome:3000
   #
   #
-  #       Alternative WebDriver/selenium URL, do not use "'s or 's! (old, deprecated, does not support screenshots very well)
+  #       Alternative WebDriver/selenium URL, do not use "'s or 's! (old, deprecated, does not support screenshots very well, Can't handle custom headers etc)
   #      - WEBDRIVER_URL=http://browser-selenium-chrome:4444/wd/hub
   #
   #       WebDriver proxy settings webdriver_proxyType, webdriver_ftpProxy, webdriver_noProxy,
@@ -69,6 +69,9 @@ services:
   #
   #        For complete privacy if you don't want to use the 'check version' / telemetry service
   #      - DISABLE_VERSION_CHECK=true
+  #
+  #        Disable all LLM / AI features, prompts etc
+  #      - LLM_FEATURES_DISABLED=true  
   #
   #        A valid timezone name to run as (for scheduling watch checking) see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   #      - TZ=America/Los_Angeles

@@ -1,45 +1,218 @@
+version: "3.7"
+
+x-logging: &default-logging
+  driver: "json-file"
+  options:
+    max-size: "${LOG_MAX_SIZE:-20m}"
+    max-file: "${LOG_MAX_FILE:-10}"
+    compress: "true"
+
 services:
   db:
-    image: postgres:16-alpine
-    container_name: windmill-db
+    deploy:
+      # To use an external database, set replicas to 0 and set DATABASE_URL to the external database url in the .env file
+      replicas: 1
+    image: postgres:16
+    shm_size: 1g
     restart: unless-stopped
     volumes:
-      - windmill_db_data:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
+    expose:
+      - 5432
     environment:
-      POSTGRES_PASSWORD: windmill_secure_password # Change this!
+      POSTGRES_PASSWORD: changeme
       POSTGRES_DB: windmill
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
       timeout: 5s
       retries: 5
+    logging: *default-logging
 
-  server:
-    image: ghcr.io/windmill-labs/windmill:latest
-    container_name: windmill-server
+  windmill_server:
+    image: ${WM_IMAGE}
+    pull_policy: always
+    deploy:
+      replicas: 1
     restart: unless-stopped
-    ports:
-      - "8005:8000"
+    expose:
+      - 8000
+      - 2525
     environment:
-      - DATABASE_URL=postgres://postgres:windmill_secure_password@db:5432/windmill?sslmode=disable
+      - DATABASE_URL=${DATABASE_URL}
       - MODE=server
     depends_on:
       db:
         condition: service_healthy
+    volumes:
+      - worker_logs:/tmp/windmill/logs
 
-  worker:
-    image: ghcr.io/windmill-labs/windmill:latest
-    container_name: windmill-worker
+    logging: *default-logging
+
+  windmill_worker:
+    image: ${WM_IMAGE}
+    pull_policy: always
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          memory: 2048M
+          # for GB, use syntax '2Gi'
     restart: unless-stopped
+    # Uncomment to enable PID namespace isolation (recommended for security)
+    # Requires privileged mode for --mount-proc flag
+    # See: https://www.windmill.dev/docs/advanced/security_isolation
+    privileged: true
     environment:
-      - DATABASE_URL=postgres://postgres:windmill_secure_password@db:5432/windmill?sslmode=disable
+      - DATABASE_URL=${DATABASE_URL}
       - MODE=worker
       - WORKER_GROUP=default
+      # If running with non-root/non-windmill UID (e.g., user: "1001:1001"),
+      # add: - HOME=/tmp
+      - FAVOR_UNSHARE_PID=true
+    depends_on:
+      db:
+        condition: service_healthy
+    # to mount the worker folder to debug, KEEP_JOB_DIR=true and mount /tmp/windmill
+    volumes:
+      - worker_dependency_cache:/tmp/windmill/cache
+      - worker_logs:/tmp/windmill/logs
+      ## Sandboxed containers (`# sandbox <image>`) run daemonless via crane + nsjail
+      ## inside the worker itself — no Docker socket or dind sidecar required.
+      ## For the legacy full-compat docker (a bare `# docker`, trusted users only),
+      ## mount the host Docker socket by uncommenting the line below. WARNING: this
+      ## grants user scripts full access to the host Docker daemon (host filesystem
+      ## access and privilege escalation) — only use it if you fully trust all users.
+      # - /var/run/docker.sock:/var/run/docker.sock
+
+    logging: *default-logging
+
+  ## This worker is specialized for "native" jobs. Native jobs run in-process and thus are much more lightweight than other jobs
+  windmill_worker_native:
+    # Use ghcr.io/windmill-labs/windmill-ee:main for the ee
+    image: ${WM_IMAGE}
+    pull_policy: always
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          memory: 2048M
+          # for GB, use syntax '2Gi'
+    restart: unless-stopped
+    # Uncomment to enable PID namespace isolation (recommended for security)
+    # Requires privileged mode for --mount-proc flag
+    # See: https://www.windmill.dev/docs/advanced/security_isolation
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - MODE=worker
+      - WORKER_GROUP=native
+      - NATIVE_MODE=true
+      - SLEEP_QUEUE=200
     depends_on:
       db:
         condition: service_healthy
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - worker_logs:/tmp/windmill/logs
+    logging: *default-logging
+  # This worker is specialized for reports or scraping jobs. It is assigned the "reports" worker group which has an init script that installs chromium and can be targeted by using the "chromium" worker tag.
+  # windmill_worker_reports:
+  #   image: ${WM_IMAGE}
+  #   pull_policy: always
+  #   deploy:
+  #     replicas: 1
+  #     resources:
+  #       limits:
+  #         memory: 2048M
+  #         # for GB, use syntax '2Gi'
+  #   restart: unless-stopped
+  #   # Uncomment to enable PID namespace isolation (recommended for security)
+  #   # Requires privileged mode for --mount-proc flag
+  #   # See: https://www.windmill.dev/docs/advanced/security_isolation
+  #   privileged: true
+  #   environment:
+  #     - DATABASE_URL=${DATABASE_URL}
+  #     - MODE=worker
+  #     - WORKER_GROUP=reports
+  #     - FAVOR_UNSHARE_PID=true
+  #   depends_on:
+  #     db:
+  #       condition: service_healthy
+  #   # to mount the worker folder to debug, KEEP_JOB_DIR=true and mount /tmp/windmill
+  #   volumes:
+  #     - worker_dependency_cache:/tmp/windmill/cache
+  #     - worker_logs:/tmp/windmill/logs
+
+  # The indexer powers full-text job and log search, an EE feature.
+  windmill_indexer:
+    image: ${WM_IMAGE}
+    pull_policy: always
+    deploy:
+      replicas: 0 # set to 1 to enable full-text job and log search
+    restart: unless-stopped
+    expose:
+      - 8002
+    environment:
+      - PORT=8002
+      - DATABASE_URL=${DATABASE_URL}
+      - MODE=indexer
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - windmill_index:/tmp/windmill/search
+      - worker_logs:/tmp/windmill/logs
+    logging: *default-logging
+
+  # Combined extra services: LSP, Multiplayer, and Debugger
+  # Each service can be enabled/disabled via environment variables:
+  #   - ENABLE_LSP=true (default) - Language Server Protocol for code intelligence
+  #   - ENABLE_MULTIPLAYER=false - Real-time collaboration (Enterprise Edition)
+  #   - ENABLE_DEBUGGER=false - Interactive debugging via DAP WebSocket
+  windmill_extra:
+    image: ghcr.io/windmill-labs/windmill-extra:latest
+    pull_policy: always
+    restart: unless-stopped
+    expose:
+      - 3001 # LSP
+      - 3002 # Multiplayer
+      - 3003 # Debugger
+    environment:
+      - ENABLE_LSP=true
+      - ENABLE_MULTIPLAYER=false # Set to true to enable multiplayer (Enterprise Edition)
+      - ENABLE_DEBUGGER=true # Set to true to enable debugger
+      - DEBUGGER_PORT=3003 # Debugger service port
+      - ENABLE_NSJAIL=false # Set to true for nsjail sandboxing (requires privileged: true)
+      - REQUIRE_SIGNED_DEBUG_REQUESTS=true # Require backend-signed JWT tokens for debug sessions. Do NOT set to false on any internet-reachable deployment: it exposes an unauthenticated code-execution debugger.
+      - WINDMILL_BASE_URL=http://windmill_server:8000
+      # - DEBUG_ALLOWED_ORIGINS=https://your-windmill-host # Optional CSWSH hardening: comma-separated allowlist of browser Origins permitted to open debug WebSockets
+    volumes:
+      - lsp_cache:/pyls/.cache
+    logging: *default-logging
+
+  caddy:
+    image: ghcr.io/windmill-labs/caddy-l4:latest
+    restart: unless-stopped
+    # Configure the mounted Caddyfile and the exposed ports or use another reverse proxy if needed
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      # - ./certs:/certs # Provide custom certificate files like cert.pem and key.pem to enable HTTPS - See the corresponding section in the Caddyfile
+    ports:
+      # To change the exposed port, simply change 80:80 to <desired_port>:80. No other changes needed
+      - 80:80
+      - 25:25
+      # - 443:443 # Uncomment to enable HTTPS handling by Caddy
+    environment:
+      - BASE_URL=":80"
+      # - BASE_URL=":443" # uncomment and comment line above to enable HTTPS via custom certificate and key files
+      # - BASE_URL=mydomain.com # Uncomment and comment line above to enable HTTPS handling by Caddy
+    logging: *default-logging
 
 volumes:
-  windmill_db_data:
+  db_data: null
+  worker_dependency_cache: null
+  worker_logs: null
+  worker_memory: null
+  windmill_index: null
+  lsp_cache: null
+  caddy_data: null

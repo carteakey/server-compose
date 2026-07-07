@@ -1,3 +1,4 @@
+version: '3'
 
 services:
   db:
@@ -12,7 +13,7 @@ services:
     image: nextcloud:apache
     restart: always
     ports:
-      - 8085:80
+      - 8080:80
     volumes:
       - nextcloud:/var/www/html
     environment:

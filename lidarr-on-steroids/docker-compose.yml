@@ -1,3 +1,4 @@
+version: '3.4'
 
 services:
   lidarr-onsteroids:
@@ -7,8 +8,8 @@ services:
     environment:
       - FLAC2CUSTOM_ARGS=-a "-vn -c:a libopus -b:a 64k" -e .opus -r '\.mp3$$'
     ports:
-      - "8687:8686" # Lidarr web UI
-      - "6596:6595" # Deemix web UI
+      - "8686:8686" # Lidarr web UI
+      - "6595:6595" # Deemix web UI
     volumes:
       - ./tmp/config:/config
       - ./tmp/config_deemix:/config_deemix
