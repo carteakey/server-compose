@@ -102,9 +102,7 @@ Alternatively, use the excellent [Dockge](#dockge) to manage your stacks.
 | **RSS**            | [FreshRSS](https://freshrss.org/)            | Self-hosted RSS feed aggregator, lightweight and customizable. | [GitHub](https://github.com/FreshRSS/FreshRSS) | [Compose](freshrss) |
 | **Notifications**  | [ntfy](https://ntfy.sh/)                     | Simple push notification service with HTTP API (UnifiedPush). | [GitHub](https://github.com/binwiederhier/ntfy) | [Compose](ntfy) |
 | **Automation**     | [n8n](https://n8n.io/)                       | Workflow automation tool (Zapier/Make alternative) with 400+ integrations. | [GitHub](https://github.com/n8n-io/n8n) | [Compose](n8n) |
-| **Passive Income / Bandwidth Sharing** | [HoneyGain](https://www.honeygain.com/) | Make money by sharing your Internet. | | [Compose](honeygain) |
-|                    | [EarnApp](https://earnapp.com/bandwidth)     | Earn passive income while your devices rest. | | [Compose](earnapp) |
-|                    | [PawnsApp](https://pawns.app/internet-sharing/) | Make passive money online by sharing your internet. | | [Compose](pawnscli) |
+
 
 
 # Auto-Update Compose Files
