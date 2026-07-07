@@ -78,19 +78,19 @@
 <header>
   <h1>server-compose</h1>
   <p class="sub">
-    55 self-hosted services with ready-to-use Docker Compose files.
+    67 self-hosted services with ready-to-use Docker Compose files.
     <a href="https://github.com/carteakey/server-compose">View on GitHub →</a>
   </p>
 </header>
 <main>
   <div class="controls">
-    <input id="search" type="search" placeholder="Search 55 services..." autofocus>
+    <input id="search" type="search" placeholder="Search 67 services..." autofocus>
     <div id="chips" class="chips"></div>
   </div>
   <div id="grid" class="grid"></div>
   <div id="empty" class="empty" hidden>No services match your filter.</div>
 </main>
-<footer>Generated 2026-04-16 22:57 UTC · <a href="https://github.com/carteakey/server-compose">github.com/carteakey/server-compose</a></footer>
+<footer>Generated 2026-07-07 19:36 UTC · <a href="https://github.com/carteakey/server-compose">github.com/carteakey/server-compose</a></footer>
 <script>
 const SERVICES = [
   {"category":"Dashboard","name":"Homepage by benphelps","description":"A highly customizable homepage (or startpage / application dashboard) with Docker and service API integrations. Sample configurations are present for most of the listed apps.","homepage":"https://github.com/benphelps/homepage","github":"https://github.com/benphelps/homepage","compose":"homepage"},
@@ -99,12 +99,15 @@ const SERVICES = [
   {"category":"Networking","name":"Traefik","description":"Cloud-native reverse proxy with automatic HTTPS and Docker integration.","homepage":"https://traefik.io/traefik/","github":"https://github.com/traefik/traefik","compose":"traefik"},
   {"category":"Networking","name":"AdGuard Home","description":"Network-wide DNS ad blocker and privacy protection.","homepage":"https://adguard.com/adguard-home.html","github":"https://github.com/AdguardTeam/AdGuardHome","compose":"adguard-home"},
   {"category":"Networking","name":"Pi-hole","description":"Network-wide DNS ad blocker (alternative to AdGuard Home).","homepage":"https://pi-hole.net/","github":"https://github.com/pi-hole/pi-hole","compose":"pihole"},
+  {"category":"Networking","name":"Cloudflare Tunnel","description":"Expose local services securely to the Cloudflare network without opening router ports.","homepage":"https://www.cloudflare.com/products/tunnel/","github":"https://github.com/cloudflare/cloudflared","compose":"cloudflare-tunnel"},
   {"category":"Identity / SSO","name":"Authentik","description":"Identity provider with SSO, LDAP, SAML, and OIDC support.","homepage":"https://goauthentik.io/","github":"https://github.com/goauthentik/authentik","compose":"authentik"},
   {"category":"Media Streaming","name":"Plex Media Server","description":"Centralized home media playback system with a powerful central server.","homepage":"https://www.plex.tv/","github":"","compose":"plexmediaserver"},
   {"category":"Media Streaming","name":"Jellyfin","description":"Jellyfin is an alternative to the proprietary Emby and Plex, to provide media from a server to end-user devices via multiple apps.","homepage":"https://jellyfin.org","github":"https://github.com/jellyfin/jellyfin","compose":"jellyfin"},
   {"category":"Media Streaming","name":"Navidrome Music Server","description":"Modern Music Server and Streamer, compatible with Subsonic/Airsonic.","homepage":"https://www.navidrome.org","github":"https://github.com/navidrome/navidrome","compose":"navidrome"},
   {"category":"Media Streaming","name":"TubeArchivist","description":"Your self hosted YouTube media server.","homepage":"https://www.tubearchivist.com/","github":"https://github.com/tubearchivist/tubearchivist","compose":"tubearchivist"},
   {"category":"Media Streaming","name":"Audiobookshelf","description":"Self-hosted audiobook and podcast server.","homepage":"https://www.audiobookshelf.org/","github":"https://github.com/advplyr/audiobookshelf","compose":"audiobookshelf"},
+  {"category":"Media Streaming","name":"Stash","description":"An organizer and tagger for local media collections.","homepage":"https://stashapp.github.io/","github":"https://github.com/stashapp/stash","compose":"stash"},
+  {"category":"Media Streaming","name":"Combined Media Server","description":"Combined media server compose file containing Jellyfin, Sonarr, Radarr, Lidarr, Prowlarr, qBittorrent, Bazarr, Seerr, Readarr, FlareSolverr, and Pinchflat.","homepage":"","github":"","compose":"media-server"},
   {"category":"Media Downloaders","name":"Transmission-OpenVPN","description":"Run Transmission (Torrent Downloader) only when OpenVPN has an active tunnel. All _arr_ applications will use it to download media.","homepage":"https://haugene.github.io/docker-transmission-openvpn/","github":"https://github.com/haugene/docker-transmission-openvpn","compose":"transmission-openvpn"},
   {"category":"Media Downloaders","name":"Radarr","description":"Radarr is an independent fork of Sonarr reworked for automatically downloading movies via Usenet and BitTorrent, à la Couchpotato.","homepage":"https://radarr.video/","github":"https://github.com/Radarr/Radarr","compose":"radarr"},
   {"category":"Media Downloaders","name":"Sonarr","description":"Automatic TV Shows downloader and manager for Usenet and BitTorrent.","homepage":"https://sonarr.tv/","github":"https://github.com/Sonarr/Sonarr","compose":"sonarr"},
@@ -116,6 +119,7 @@ const SERVICES = [
   {"category":"File Sharing & Backup","name":"Immich","description":"High performance self-hosted photo and video backup solution.","homepage":"https://immich.app/","github":"https://github.com/immich-app/immich","compose":"immich"},
   {"category":"File Sharing & Backup","name":"Nextcloud","description":"A safe home for all your data. Access & share your files, calendars, contacts, mail & more from any device, on your terms.","homepage":"https://nextcloud.com/install/#instructions-server","github":"https://github.com/nextcloud/server","compose":"nextcloud"},
   {"category":"File Sharing & Backup","name":"Paperless-ngx","description":"Paperless-ngx is a document management system that transforms your physical documents into a searchable online archive so you can keep, well, less paper.","homepage":"https://docs.paperless-ngx.com","github":"https://github.com/paperless-ngx/paperless-ngx","compose":"paperless-ngx"},
+  {"category":"File Sharing & Backup","name":"PhotoPrism","description":"AI-powered photo management and backup app with face/scene recognition.","homepage":"https://photoprism.app/","github":"https://github.com/photoprism/photoprism","compose":"photoprism"},
   {"category":"Password Management","name":"Vaultwarden","description":"Lightweight Bitwarden-compatible password manager server.","homepage":"https://github.com/dani-garcia/vaultwarden","github":"https://github.com/dani-garcia/vaultwarden","compose":"vaultwarden"},
   {"category":"Container Management","name":"Portainer","description":"Lightweight management UI for Docker containers.","homepage":"https://www.portainer.io","github":"https://github.com/portainer/portainer","compose":"portainer"},
   {"category":"Container Management","name":"WatchTower","description":"Automates Docker container base image updates.","homepage":"https://containrrr.dev/watchtower/","github":"https://github.com/containrrr/watchtower","compose":"watchtower"},
@@ -127,21 +131,29 @@ const SERVICES = [
   {"category":"Tools","name":"Stirling PDF","description":"Self-hosted PDF manipulation tool (merge, split, convert, OCR).","homepage":"https://stirlingpdf.io/","github":"https://github.com/Stirling-Tools/Stirling-PDF","compose":"stirling-pdf"},
   {"category":"Tools","name":"IT Tools","description":"Collection of handy developer utilities (hash generators, encoders, etc).","homepage":"https://it-tools.tech/","github":"https://github.com/CorentinTh/it-tools","compose":"it-tools"},
   {"category":"Tools","name":"SearXNG","description":"Privacy-respecting meta search engine aggregating 70+ sources.","homepage":"https://docs.searxng.org/","github":"https://github.com/searxng/searxng","compose":"searxng"},
+  {"category":"Tools","name":"UpSnap","description":"Wake-on-LAN dashboard to wake up network devices on demand.","homepage":"https://github.com/seriousm4x/upsnap","github":"https://github.com/seriousm4x/upsnap","compose":"upsnap"},
+  {"category":"Tools","name":"Kiwix","description":"Offline reader for Wikipedia, StackExchange, and other online wikis.","homepage":"https://www.kiwix.org/","github":"https://github.com/kiwix/kiwix-tools","compose":"kiwix"},
+  {"category":"Tools","name":"Filebrowser","description":"Web-based file manager to browse, upload, download, and share files.","homepage":"https://filebrowser.org/","github":"https://github.com/filebrowser/filebrowser","compose":"filebrowser"},
   {"category":"Finance","name":"Firefly III","description":"\"Firefly III\" is a (self-hosted) manager for your personal finances.","homepage":"https://www.firefly-iii.org","github":"https://github.com/firefly-iii/firefly-iii/","compose":"firefly-iii"},
   {"category":"Finance","name":"Actual Budget","description":"Actual Budget is a super fast and privacy-focused app for managing your finances.","homepage":"https://actualbudget.org","github":"https://github.com/actualbudget/actual","compose":"actual-budget"},
-  {"category":"Server Monitoring","name":"cAdvisor","description":"Analyzes resource usage and performance of running docker containers.","homepage":"https://github.com/google/cadvisor","github":"https://github.com/google/cadvisor","compose":"cadvisor"},
+  {"category":"Server Monitoring","name":"cAdvisor","description":"Automatically monitors container metrics.","homepage":"https://github.com/google/cadvisor","github":"https://github.com/google/cadvisor","compose":"cadvisor"},
   {"category":"Server Monitoring","name":"Prometheus","description":"Open-source monitoring system.","homepage":"https://prometheus.io/","github":"https://github.com/prometheus/prometheus","compose":"prometheus"},
   {"category":"Server Monitoring","name":"node-exporter","description":"Exposes hardware- and kernel-related metrics.","homepage":"https://github.com/prometheus/node_exporter","github":"https://github.com/prometheus/node_exporter","compose":"node-exporter"},
   {"category":"Server Monitoring","name":"Grafana","description":"Multi-platform open source analytics and interactive visualization web application.","homepage":"https://grafana.com/","github":"https://github.com/grafana/grafana","compose":"grafana"},
   {"category":"Server Monitoring","name":"Scrutiny","description":"WebUI for smartd S.M.A.R.T monitoring.","homepage":"https://github.com/AnalogJ/scrutiny","github":"https://github.com/AnalogJ/scrutiny","compose":"scrutiny"},
   {"category":"Server Monitoring","name":"Uptime Kuma","description":"Lightweight and fancy self-hosted monitoring tool.","homepage":"https://uptime.kuma.pet/","github":"https://github.com/louislam/uptime-kuma","compose":"uptime-kuma"},
   {"category":"Server Monitoring","name":"Speedtest Tracker","description":"Automated internet speed test scheduling with historical graphs.","homepage":"https://docs.speedtest-tracker.dev/","github":"https://github.com/alexjustesen/speedtest-tracker","compose":"speedtest-tracker"},
+  {"category":"Server Monitoring","name":"Beszel","description":"Lightweight self-hosted server monitoring hub and agent with historical graphs.","homepage":"https://beszel.dev/","github":"https://github.com/warrenchen/beszel","compose":"beszel"},
   {"category":"AI / LLM","name":"Ollama + Open WebUI","description":"Local LLM inference with a ChatGPT-style web interface.","homepage":"https://ollama.com/","github":"https://github.com/ollama/ollama","compose":"ollama"},
+  {"category":"AI / LLM","name":"Firecrawl","description":"API service that crawls any URL and converts it to LLM-friendly Markdown.","homepage":"https://www.firecrawl.dev/","github":"https://github.com/mendableai/firecrawl","compose":"firecrawl"},
   {"category":"Dev Tools","name":"Gitea","description":"Lightweight self-hosted Git service (GitHub/GitLab alternative).","homepage":"https://about.gitea.com/","github":"https://github.com/go-gitea/gitea","compose":"gitea"},
+  {"category":"Dev Tools","name":"Windmill","description":"Developer platform to build multi-step workflows, scripts, and internal tools.","homepage":"https://www.windmill.dev/","github":"https://github.com/windmill-labs/windmill","compose":"windmill"},
   {"category":"Recipes","name":"Tandoor Recipes","description":"Recipe manager and meal planner for your household.","homepage":"https://tandoor.dev/","github":"https://github.com/TandoorRecipes/recipes","compose":"tandoor"},
   {"category":"Recipes","name":"Mealie","description":"Intuitive recipe manager with meal planning and recipe scraping.","homepage":"https://mealie.io/","github":"https://github.com/mealie-recipes/mealie","compose":"mealie"},
   {"category":"Books","name":"Calibre-Web","description":"Web-based ebook management and reader powered by Calibre.","homepage":"https://github.com/janeczku/calibre-web","github":"https://github.com/janeczku/calibre-web","compose":"calibre-web"},
+  {"category":"Books","name":"Kavita","description":"Comic, manga, and book library server with a clean responsive UI.","homepage":"https://www.kavitareader.com/","github":"https://github.com/Kareadita/Kavita","compose":"kavita"},
   {"category":"Notes","name":"Memos","description":"Lightweight, privacy-first note-taking and micro-journaling server with a clean UI.","homepage":"https://usememos.com/","github":"https://github.com/usememos/memos","compose":"memos"},
+  {"category":"Notes","name":"Linkding","description":"Minimalist, fast, self-hosted bookmark manager written in Python.","homepage":"https://github.com/sissbruecker/linkding","github":"https://github.com/sissbruecker/linkding","compose":"linkding"},
   {"category":"RSS","name":"FreshRSS","description":"Self-hosted RSS feed aggregator, lightweight and customizable.","homepage":"https://freshrss.org/","github":"https://github.com/FreshRSS/FreshRSS","compose":"freshrss"},
   {"category":"Notifications","name":"ntfy","description":"Simple push notification service with HTTP API (UnifiedPush).","homepage":"https://ntfy.sh/","github":"https://github.com/binwiederhier/ntfy","compose":"ntfy"},
   {"category":"Automation","name":"n8n","description":"Workflow automation tool (Zapier/Make alternative) with 400+ integrations.","homepage":"https://n8n.io/","github":"https://github.com/n8n-io/n8n","compose":"n8n"},
