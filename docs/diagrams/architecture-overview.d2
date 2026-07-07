@@ -62,10 +62,18 @@ fleet: "Services registry" {
     firecrawl: "firecrawl" {
       class: stack
       grid-columns: 2
-      api: "api (3002)"
+      api: "api (\${INTERNAL_PORT)"
       api.class: service
+      foundationdb: "foundationdb"
+      foundationdb.class: service
+      foundationdb_init: "foundationdb-init"
+      foundationdb_init.class: service
+      nuq_postgres: "nuq-postgres"
+      nuq_postgres.class: service
       playwright_service: "playwright-service"
       playwright_service.class: service
+      rabbitmq: "rabbitmq"
+      rabbitmq.class: service
       redis: "redis" {
         class: icon
         shape: image
@@ -237,16 +245,39 @@ fleet: "Services registry" {
     windmill: "windmill" {
       class: stack
       grid-columns: 2
+      caddy: "caddy (1525, 80)"
+      caddy.class: service
       db: "db"
       db.class: service
-      server: "server (8005)" {
+      windmill_extra: "windmill_extra" {
         class: icon
         shape: image
         width: 80
         height: 80
         icon: ${di}/windmill.svg
       }
-      worker: "worker" {
+      windmill_indexer: "windmill_indexer" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/windmill.svg
+      }
+      windmill_server: "windmill_server" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/windmill.svg
+      }
+      windmill_worker: "windmill_worker" {
+        class: icon
+        shape: image
+        width: 80
+        height: 80
+        icon: ${di}/windmill.svg
+      }
+      windmill_worker_native: "windmill_worker_native" {
         class: icon
         shape: image
         width: 80
@@ -292,7 +323,7 @@ fleet: "Services registry" {
     nextcloud: "nextcloud" {
       class: stack
       grid-columns: 1
-      app: "app (8085)" {
+      app: "app (8080)" {
         class: icon
         shape: image
         width: 80
@@ -359,7 +390,7 @@ fleet: "Services registry" {
     firefly_iii: "firefly-iii" {
       class: stack
       grid-columns: 2
-      app: "app (83)"
+      app: "app (80)"
       app.class: service
       cron: "cron"
       cron.class: service
@@ -530,7 +561,7 @@ fleet: "Services registry" {
     lidarr_on_steroids: "lidarr-on-steroids" {
       class: stack
       grid-columns: 1
-      lidarr_onsteroids: "lidarr-onsteroids (6596, 8687)" {
+      lidarr_onsteroids: "lidarr-onsteroids (6595, 8686)" {
         class: icon
         shape: image
         width: 80
@@ -682,7 +713,7 @@ fleet: "Services registry" {
         height: 80
         icon: ${di}/redis.svg
       }
-      tubearchivist: "tubearchivist (8002)" {
+      tubearchivist: "tubearchivist (8000)" {
         class: icon
         shape: image
         width: 80
@@ -754,7 +785,7 @@ fleet: "Services registry" {
     linkding: "linkding" {
       class: stack
       grid-columns: 1
-      linkding: "linkding (9099)" {
+      linkding: "linkding (-9090})" {
         class: icon
         shape: image
         width: 80
@@ -784,7 +815,7 @@ fleet: "Services registry" {
     ntfy: "ntfy" {
       class: stack
       grid-columns: 1
-      ntfy: "ntfy (8087)" {
+      ntfy: "ntfy (80)" {
         class: icon
         shape: image
         width: 80
@@ -875,7 +906,7 @@ fleet: "Services registry" {
     freshrss: "freshrss" {
       class: stack
       grid-columns: 1
-      freshrss: "freshrss (8080)" {
+      freshrss: "freshrss" {
         class: icon
         shape: image
         width: 80
@@ -907,7 +938,7 @@ fleet: "Services registry" {
       grid-columns: 1
       db_recipes: "db_recipes"
       db_recipes.class: service
-      web_recipes: "web_recipes (85)"
+      web_recipes: "web_recipes (80)"
       web_recipes.class: service
     }
 
@@ -977,14 +1008,14 @@ fleet: "Services registry" {
       grid-columns: 2
       alertmanager: "alertmanager (9093)"
       alertmanager.class: service
-      cadvisor: "cadvisor (8088)" {
+      cadvisor: "cadvisor (8080)" {
         class: icon
         shape: image
         width: 80
         height: 80
         icon: ${dipng}/cadvisor.png
       }
-      grafana: "grafana (3005)" {
+      grafana: "grafana (3000)" {
         class: icon
         shape: image
         width: 80
