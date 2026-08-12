@@ -1,0 +1,6 @@
+services:
+  broken:
+    image: alpine:3.20
+    # A comment-only environment block is invalid Compose syntax.  This is a
+    # small regression fixture for path-specific parser failures.
+    environment:

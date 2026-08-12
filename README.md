@@ -157,6 +157,54 @@ Many services default to the same host ports (e.g. `8080`). The included `check-
 ./check-ports.sh --fix
 ```
 
+# Catalog Validation
+
+Catalog-changing pull requests use the same non-deploying validation command
+locally and in GitHub Actions:
+
+The command requires Python 3, Docker Compose, and PyYAML. Install it with
+`python3 -m pip install pyyaml`.
+
+```bash
+python3 _scripts/validate_catalog.py
+```
+
+The canonical inventory is [catalog-validation.yaml](catalog-validation.yaml).
+It enumerates all 64 maintained Compose examples, keeps archived examples
+under `archive/` and generated output under `docs/` out of the active set, and
+requires a manifest update when a new Compose file is added. The validator:
+
+- runs `docker compose config --quiet` for every active entry;
+- copies each file to a temporary directory and creates sanitized example
+  `env_file` values, so local `.env` files and secrets are never read;
+- reports every path, including the two documented template exceptions;
+- runs non-mutating `bash -n` checks for each maintained shell script; and
+- validates the `services.yaml` updater registry and README Compose links.
+
+It never pulls images, builds images, starts containers, deploys services,
+rewrites catalog files, or contacts private infrastructure. The two expected
+template exceptions are intentionally enumerated in the manifest: Actual
+Budget's comment-only environment block and Calibre-Web's
+`<path_to_books>` placeholder are not valid until a user customizes the sample.
+Immich, Linkding, Nextcloud, Prometheus, Tandoor, and Windmill are checked with
+temporary sanitized environment defaults rather than any local environment
+files.
+The standalone `lidarr/` example is likewise documented as an intentionally
+unlisted README row because the combined `media-server` stack is the advertised
+catalog entry.
+
+The separate scheduled updater can still be blocked at its pull-request step
+by the repository's GitHub Actions permission setting (`GitHub Actions is not
+permitted to create or approve pull requests`). The validation gate is
+read-only and does not change that external setting.
+
+# Planning
+
+Committed implementation work is tracked in the
+[Server Compose Linear project](https://linear.app/carteakey/project/server-compose-7a4e19322863).
+The roadmap below is for ideas and possible future directions; do not duplicate
+committed Linear issues in it or in GitHub Issues.
+
 # Roadmap
 
 - List will continue to grow, but will try to not be overwhelming.
