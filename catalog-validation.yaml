@@ -1,0 +1,110 @@
+# Canonical inventory and policy for the non-deploying catalog validation gate.
+#
+# Every maintained Compose file must appear exactly once below.  Files under
+# archive/ are historical examples; docs/index.html is generated; and tests/
+# contains validator fixtures.  None of those are runtime catalog entries.
+
+schema_version: 1
+
+inventory:
+  excluded_roots:
+    - .git
+    - archive
+    - docs
+    - tests
+  archived_roots:
+    - archive
+  generated_paths:
+    - docs/index.html
+
+compose:
+  strict:
+    - adguard-home/docker-compose.yml
+    - audiobookshelf/docker-compose.yml
+    - authentik/docker-compose.yml
+    - bazarr/docker-compose.yml
+    - beszel/docker-compose.yml
+    - cadvisor/docker-compose.yml
+    - changedetection.io/docker-compose.yml
+    - cloudflare-tunnel/docker-compose.yml
+    - deemix/docker-compose.yml
+    - dockge/docker-compose.yml
+    - epicgames-freegames/docker-compose.yml
+    - filebrowser/docker-compose.yml
+    - fileflows/docker-compose.yml
+    - firecrawl/docker-compose.yml
+    - firefly-iii/docker-compose.yml
+    - freshrss/docker-compose.yml
+    - gitea/docker-compose.yml
+    - grafana/docker-compose.yml
+    - homarr/docker-compose.yml
+    - home-assistant/docker-compose.yml
+    - homepage/docker-compose.yml
+    - immich/docker-compose.yml
+    - it-tools/docker-compose.yml
+    - jellyfin/docker-compose.yml
+    - kavita/docker-compose.yml
+    - kiwix/docker-compose.yml
+    - lidarr-on-steroids/docker-compose.yml
+    - lidarr/docker-compose.yml
+    - linkding/docker-compose.yml
+    - mealie/docker-compose.yml
+    - media-server/docker-compose.yml
+    - memos/docker-compose.yml
+    - n8n/docker-compose.yml
+    - navidrome/docker-compose.yml
+    - nextcloud/docker-compose.yml
+    - node-exporter/docker-compose.yml
+    - ntfy/docker-compose.yml
+    - ollama/docker-compose.yml
+    - paperless-ngx/docker-compose.yml
+    - photoprism/docker-compose.yml
+    - pihole/docker-compose.yml
+    - plexmediaserver/docker-compose.yml
+    - portainer/docker-compose.yml
+    - prometheus/docker-compose.yml
+    - prowlarr/docker-compose.yml
+    - pyload/docker-compose.yml
+    - radarr/docker-compose.yml
+    - scrutiny/docker-compose.yml
+    - searxng/docker-compose.yml
+    - sonarr/docker-compose.yml
+    - speedtest-tracker/docker-compose.yml
+    - stash/docker-compose.yml
+    - stirling-pdf/docker-compose.yml
+    - tandoor/docker-compose.yml
+    - traefik/docker-compose.yml
+    - transmission-openvpn/docker-compose.yml
+    - tubearchivist/docker-compose.yml
+    - upsnap/docker-compose.yml
+    - uptime-kuma/docker-compose.yml
+    - vaultwarden/docker-compose.yml
+    - watchtower/docker-compose.yml
+    - windmill/docker-compose.yml
+
+  # These two public examples intentionally retain user-facing placeholders
+  # that are not valid Compose values until the reader customizes them.  The
+  # validator still invokes `docker compose config --quiet` and requires the
+  # documented failure; an unlisted or different failure is a gate error.
+  expected_failures:
+    - path: calibre-web/docker-compose.yml
+      match: "undefined volume"
+      reason: "<path_to_books> is an intentional host-path placeholder; Compose interprets it as an undeclared named volume until customized."
+    - path: actual-budget/docker-compose.yml
+      match: "environment must be a mapping"
+      reason: "The upstream sample leaves a comment-only environment block and instructs users to remove it when no options are configured."
+
+shell_scripts:
+  - update-compose.sh
+  - check-ports.sh
+  - gen-page.sh
+  - scan-services.sh
+
+catalog:
+  services_file: services.yaml
+  readme_file: README.md
+  # Standalone Lidarr remains a maintained Compose example but is not a
+  # separately advertised README row; the combined media-server row covers it.
+  allow_unlisted_compose:
+    - path: lidarr/docker-compose.yml
+      reason: "The README advertises the combined media-server stack; standalone Lidarr is intentionally not a second catalog row."

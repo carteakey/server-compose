@@ -1,0 +1,42 @@
+name: Validate Compose catalog
+
+on:
+  pull_request:
+    paths:
+      - "**/docker-compose.y*ml"
+      - "**/compose.y*ml"
+      - "catalog-validation.yaml"
+      - "services.yaml"
+      - "README.md"
+      - "_scripts/validate_catalog.py"
+      - "*.sh"
+      - "tests/**"
+      - ".github/workflows/validate-catalog.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install YAML parser
+        run: python -m pip install --disable-pip-version-check --no-input pyyaml
+
+      # This is the same non-deploying command documented for local use.  It
+      # only runs `docker compose config --quiet`; it never pulls, starts, or
+      # rewrites a service.
+      - name: Validate catalog and maintenance scripts
+        run: python3 _scripts/validate_catalog.py
+
+      - name: Run focused parser fixtures
+        run: python3 -m unittest discover -s tests -p 'test_*.py'
