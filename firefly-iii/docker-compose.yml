@@ -3,6 +3,7 @@ services:
     image: fireflyiii/core:latest
     hostname: app
     container_name: firefly_iii_core
+    stop_signal: SIGINT
     restart: always
     volumes:
       - firefly_iii_upload:/var/www/html/storage/upload
@@ -33,11 +34,12 @@ services:
     restart: always
     container_name: firefly_iii_cron
     env_file: .env
+    init: true
     command: ["sh", "-c", "apk add tzdata && \
       (ln -s /usr/share/zoneinfo/$$TZ /etc/localtime || true) && \
       echo \"0 3 * * * wget -qO- http://app:8080/api/v1/cron/$$STATIC_CRON_TOKEN;echo\" \
       | crontab - && \
-      crond -f -L /dev/stdout"]
+      exec crond -f -L /dev/stdout"]
     networks:
       - firefly_iii
     depends_on:

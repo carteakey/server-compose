@@ -43,15 +43,17 @@ services:
       - model-cache:/cache
     env_file:
       - .env
+    environment:
+      MACHINE_LEARNING_MODEL_REVISION: v2
     restart: always
     healthcheck:
       disable: false
 
   redis:
     container_name: immich_redis
-    image: docker.io/valkey/valkey:9@sha256:4963247afc4cd33c7d3b2d2816b9f7f8eeebab148d29056c2ca4d7cbc966f2d9
+    image: docker.io/valkey/valkey:9@sha256:418652cfb58ef879d4978c33553735d7147016032d5aefaa14c828e611eb9dfd
     healthcheck:
-      test: redis-cli ping || exit 1
+      test: redis-cli ping | grep -q PONG || exit 1
     restart: always
 
   database:
